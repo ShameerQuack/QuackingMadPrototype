@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Stats: MonoBehaviour
 {
-    public string name;
+    public string charName;
     public int damage;
     public int maxHP;
     public int currentHP;

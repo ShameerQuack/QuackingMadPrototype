@@ -18,6 +18,7 @@ public class BattleSystem : MonoBehaviour
     public GameObject enemy;
     public BattleHUD playerHUD;
     public BattleHUD enemyHUD;
+    // Note: Might want to move Audio System to a different script
     public AudioSource textTransition;
     public AudioSource hitSound;
     public AudioSource gunshots;
@@ -45,7 +46,7 @@ public class BattleSystem : MonoBehaviour
     }
 
     IEnumerator StartIntro(){
-        dialogueText.text = enemyStats.name + " looked at you funny.";
+        dialogueText.text = enemyStats.charName + " looked at you funny.";
         yield return new WaitForSeconds(3f);
         dialogueText.text = "Pop her ass.";
         yield return new WaitForSeconds(3f);
@@ -66,7 +67,7 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
 
-        dialogueText.text = enemyStats.name + " took " + playerStats.damage + " damage.";
+        dialogueText.text = enemyStats.charName + " took " + playerStats.damage + " damage.";
         yield return new WaitForSeconds(3f);
         if(isDead){
             state = BattleState.WON;
@@ -78,7 +79,7 @@ public class BattleSystem : MonoBehaviour
     }
 
     IEnumerator EnemyTurn(){
-        dialogueText.text = enemyStats.name + " attacks!";
+        dialogueText.text = enemyStats.charName + " attacks!";
         
         yield return new WaitForSeconds(3f);
 
@@ -162,7 +163,7 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
         dialogueInterface.GetComponent<Canvas>().enabled = true;
-        dialogueText.text = enemyStats.name + " took " + 999999 + " damage.";
+        dialogueText.text = enemyStats.charName + " took " + 999999 + " damage.";
         yield return new WaitForSeconds(3f);
         if(isDead){
             state = BattleState.WON;
