@@ -45,6 +45,7 @@ public class BattleSystem : MonoBehaviour
         StartCoroutine(StartIntro());
     }
 
+
     IEnumerator StartIntro(){
         dialogueText.text = enemyStats.charName + " looked at you funny.";
         yield return new WaitForSeconds(3f);
@@ -53,12 +54,14 @@ public class BattleSystem : MonoBehaviour
         PlayerTurn();
     }
 
+    // Player Attack Method
     IEnumerator PlayerAttack()
     {
         bool isDead = enemyStats.TakeDamage(playerStats.damage);
 
         enemyHUD.SetHP(enemyStats.currentHP);
         hitSound.Play();
+        // Shake Effect upon taking damage (Very nice)
         for ( int i = 0; i < 10; i++)
         {
             enemy.transform.position += new Vector3(5f, 0, 0);
@@ -78,6 +81,7 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    // Enemy Turn Method
     IEnumerator EnemyTurn(){
         dialogueText.text = enemyStats.charName + " attacks!";
         
@@ -87,6 +91,7 @@ public class BattleSystem : MonoBehaviour
 
         playerHUD.SetHP(playerStats.currentHP);
         hitSound.Play();
+        // Shaky Effect
         for ( int i = 0; i < 10; i++)
         {
             player.transform.position += new Vector3(5f, 0, 0);
@@ -95,11 +100,10 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
         
-
+        // Can use Write Method here-------
         dialogueText.text = " You took " + enemyStats.damage + " damage.";
 
         yield return new WaitForSeconds(3f);
-
         if(isDead)
         {
             state = BattleState.LOST;
@@ -111,6 +115,7 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    // Method to End Battle
     void EndBattle(){
         if (state == BattleState.WON){
             dialogueText.text = "You defeated the evil Snow White!";
@@ -119,12 +124,14 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    // Method to start PlayerTurn
     void PlayerTurn(){
         dialogueInterface.GetComponent<Canvas>().enabled = false;
         choicesInterface.GetComponent<Canvas>().enabled = true;
         EventSystem.current.SetSelectedGameObject(null);
     }
 
+    // Method to write text in dialogue box (Unused right now)
     IEnumerator Write(string text){
         dialogueInterface.GetComponent<Canvas>().enabled = true;
         dialogueText.text = text;
@@ -133,16 +140,21 @@ public class BattleSystem : MonoBehaviour
         dialogueInterface.GetComponent<Canvas>().enabled = false;
     }
 
+    // Opens Inventory Menu
     public void OnInventoryButton(){
         inventoryInterface.GetComponent<Canvas>().enabled = true;
     }
 
+    // Method to close all UI
     void closeAllInterface(){
         choicesInterface.GetComponent<Canvas>().enabled = false;
         dialogueInterface.GetComponent<Canvas>().enabled = false;
         inventoryInterface.GetComponent<Canvas>().enabled = false;
     }
 
+    // Method for Items -------------------------------------------------------
+
+    // Method for Glock Item
     IEnumerator UseGlock(){
         backgroundMusic.Pause();
         guncock.Play();
@@ -174,7 +186,43 @@ public class BattleSystem : MonoBehaviour
         }
 
     }
+    // Method for Mirror Item - Needs Audio (my bad)
+    IEnumerator UseMirror(){
+        bool isDead = enemyStats.TakeDamage(299);
 
+        dialogueInterface.GetComponent<Canvas>().enabled = true;
+        dialogueText.text = enemyStats.charName + " Looked at the Mirror";
+        yield return new WaitForSeconds(2.5f);
+        dialogueText.text = "It seems to have reminded her of something";
+        yield return new WaitForSeconds(2.5f);
+        dialogueText.text = "She seems a bit...sad...";
+        yield return new WaitForSeconds(3f);
+        dialogueInterface.GetComponent<Canvas>().enabled = false;
+
+        enemyHUD.SetHP(enemyStats.currentHP);
+        hitSound.Play();
+        // Shaky Effect!
+        for ( int i = 0; i < 10; i++)
+        {
+            enemy.transform.position += new Vector3(5f, 0, 0);
+            yield return new WaitForSeconds(0.01f);
+            enemy.transform.position -= new Vector3(5f, 0, 0);
+            yield return new WaitForSeconds(0.01f);
+        }
+        dialogueInterface.GetComponent<Canvas>().enabled = true;
+        dialogueText.text = enemyStats.charName + "Took 299 Emotional Damage lol";
+        yield return new WaitForSeconds(3f);
+        if(isDead){
+            state = BattleState.WON;
+            EndBattle();
+        } else {
+            state = BattleState.ENEMYTURN;
+            StartCoroutine(EnemyTurn());
+        }
+
+    }
+
+    //UI Element Methods -----------------------------------------------------------------------------
     public void OnGlockUsed(){
         closeAllInterface();
         if(state != BattleState.PLAYERTURN){
@@ -182,6 +230,16 @@ public class BattleSystem : MonoBehaviour
         }
 
         StartCoroutine(UseGlock());
+
+    }
+
+    public void OnMirrorUsed(){
+        closeAllInterface();
+        if(state != BattleState.PLAYERTURN){
+            return;
+        }
+
+        StartCoroutine(UseMirror());
 
     }
     
