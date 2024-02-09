@@ -14,6 +14,8 @@ public class BattleSystem : MonoBehaviour
     public Canvas choicesInterface;
     public Canvas inventoryInterface;
     public TextMeshProUGUI dialogueText;
+    public TextMeshProUGUI playerHealthText;
+    public TextMeshProUGUI enemyHealthText;
     public GameObject player;
     public GameObject enemy;
     public BattleHUD playerHUD;
@@ -35,7 +37,7 @@ public class BattleSystem : MonoBehaviour
 
     void preIntro(){
         choicesInterface.GetComponent<Canvas>().enabled = false;
-        inventoryInterface.GetComponent<Canvas>().enabled = false;
+        // inventoryInterface.GetComponent<Canvas>().enabled = false;
         playerStats = player.GetComponent<Stats>();
         enemyStats = enemy.GetComponent<Stats>();
         playerHUD.SetHUD(playerStats);
