@@ -26,8 +26,19 @@ public class BattleHUD : MonoBehaviour
         }
     }
 
-    public void SetHP(int hp)
+    public void SetHP(Stats unit)
     {
-        hpSlider.value = hp;
+        hpSlider.value = unit.currentHP;
+        if (unit.barrier == 0){
+            barrierText = "";
+        } else {
+            barrierText = unit.barrier.ToString();
+        }
+        if (reverseText){
+            hpText.text =  "<color=#6BF2F6>" + barrierText + "</color> <size=0.06>" + unit.currentHP + "</size>/" + unit.maxHP;
+        } 
+        else {
+            hpText.text =  "<size=0.06>" + unit.currentHP + "</size>/" + unit.maxHP + "<color=#6BF2F6> " + barrierText + "</color>";
+        }
     }
 }

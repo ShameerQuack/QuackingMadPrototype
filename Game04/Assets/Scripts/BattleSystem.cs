@@ -37,7 +37,7 @@ public class BattleSystem : MonoBehaviour
 
     void preIntro(){
         choicesInterface.GetComponent<Canvas>().enabled = false;
-        // inventoryInterface.GetComponent<Canvas>().enabled = false;
+        inventoryInterface.GetComponent<Canvas>().enabled = false;
         playerStats = player.GetComponent<Stats>();
         enemyStats = enemy.GetComponent<Stats>();
         playerHUD.SetHUD(playerStats);
@@ -61,7 +61,7 @@ public class BattleSystem : MonoBehaviour
     {
         bool isDead = enemyStats.TakeDamage(playerStats.damage);
 
-        enemyHUD.SetHP(enemyStats.currentHP);
+        enemyHUD.SetHP(enemyStats);
         hitSound.Play();
         // Shake Effect upon taking damage (Very nice)
         for ( int i = 0; i < 10; i++)
@@ -91,7 +91,7 @@ public class BattleSystem : MonoBehaviour
 
         bool isDead = playerStats.TakeDamage(enemyStats.damage);
 
-        playerHUD.SetHP(playerStats.currentHP);
+        playerHUD.SetHP(playerStats);
         hitSound.Play();
         // Shaky Effect
         for ( int i = 0; i < 10; i++)
@@ -129,8 +129,9 @@ public class BattleSystem : MonoBehaviour
     // Method to start PlayerTurn
     void PlayerTurn(){
         dialogueInterface.GetComponent<Canvas>().enabled = false;
-        choicesInterface.GetComponent<Canvas>().enabled = true;
+    //    choicesInterface.GetComponent<Canvas>().enabled = true;
         EventSystem.current.SetSelectedGameObject(null);
+        inventoryInterface.GetComponent<Canvas>().enabled = true;
     }
 
     // Method to write text in dialogue box (Unused right now)
@@ -143,9 +144,9 @@ public class BattleSystem : MonoBehaviour
     }
 
     // Opens Inventory Menu
-    public void OnInventoryButton(){
-        inventoryInterface.GetComponent<Canvas>().enabled = true;
-    }
+    //public void OnInventoryButton(){
+    //    inventoryInterface.GetComponent<Canvas>().enabled = true;
+    //}
 
     // Method to close all UI
     void closeAllInterface(){
@@ -167,7 +168,7 @@ public class BattleSystem : MonoBehaviour
 
         bool isDead = enemyStats.TakeDamage(9999999);
 
-        enemyHUD.SetHP(enemyStats.currentHP);
+        enemyHUD.SetHP(enemyStats);
         hitSound.Play();
         for ( int i = 0; i < 10; i++)
         {
@@ -201,7 +202,7 @@ public class BattleSystem : MonoBehaviour
         yield return new WaitForSeconds(3f);
         dialogueInterface.GetComponent<Canvas>().enabled = false;
 
-        enemyHUD.SetHP(enemyStats.currentHP);
+        enemyHUD.SetHP(enemyStats);
         hitSound.Play();
         // Shaky Effect!
         for ( int i = 0; i < 10; i++)
