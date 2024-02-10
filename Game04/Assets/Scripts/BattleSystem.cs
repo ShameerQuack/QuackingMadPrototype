@@ -37,7 +37,7 @@ public class BattleSystem : MonoBehaviour
 
     void preIntro(){
         choicesInterface.GetComponent<Canvas>().enabled = false;
-        // inventoryInterface.GetComponent<Canvas>().enabled = false;
+        EnemyAttackIndicatorController.Instance.enableIndicator(0);
         playerStats = player.GetComponent<Stats>();
         enemyStats = enemy.GetComponent<Stats>();
         playerHUD.SetHUD(playerStats);
@@ -85,35 +85,80 @@ public class BattleSystem : MonoBehaviour
 
     // Enemy Turn Method
     IEnumerator EnemyTurn(){
-        dialogueText.text = enemyStats.charName + " attacks!";
+        if(EnemyAttackIndicatorController.Instance.getEnabledIndicator() == 0) {
+            dialogueText.text = enemyStats.charName + " angrily attacks!";
         
-        yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(3f);
 
-        bool isDead = playerStats.TakeDamage(enemyStats.damage);
+            bool isDead = playerStats.TakeDamage(enemyStats.damage);
 
-        playerHUD.SetHP(playerStats.currentHP);
-        hitSound.Play();
-        // Shaky Effect
-        for ( int i = 0; i < 10; i++)
-        {
-            player.transform.position += new Vector3(5f, 0, 0);
-            yield return new WaitForSeconds(0.01f);
-            player.transform.position -= new Vector3(5f, 0, 0);
-            yield return new WaitForSeconds(0.01f);
-        }
+            playerHUD.SetHP(playerStats.currentHP);
+            hitSound.Play();
+            // Shaky Effect
+            for ( int i = 0; i < 10; i++)
+            {
+                player.transform.position += new Vector3(5f, 0, 0);
+                yield return new WaitForSeconds(0.01f);
+                player.transform.position -= new Vector3(5f, 0, 0);
+                yield return new WaitForSeconds(0.01f);
+            }
+            
+            // Can use Write Method here-------
+            dialogueText.text = " You took " + enemyStats.damage + " damage.";
+
+            yield return new WaitForSeconds(3f);
+
+            if(isDead)
+            {
+                state = BattleState.LOST;
+                EnemyAttackIndicatorController.Instance.disableAllIndicators();
+                EndBattle();
+            }
+            else {
+                state = BattleState.PLAYERTURN;
+                int enemyAttackType = Random.Range(0, 2);
+                EnemyAttackIndicatorController.Instance.disableAllIndicators();
+                EnemyAttackIndicatorController.Instance.enableIndicator(enemyAttackType);
+                PlayerTurn();
+            }
+        } else if (EnemyAttackIndicatorController.Instance.getEnabledIndicator() == 1) {
+            dialogueText.text = enemyStats.charName + " recklessly attacks!";
+
+            int enemyDamage= Random.Range(0, 50);
         
-        // Can use Write Method here-------
-        dialogueText.text = " You took " + enemyStats.damage + " damage.";
+            yield return new WaitForSeconds(3f);
 
-        yield return new WaitForSeconds(3f);
-        if(isDead)
-        {
-            state = BattleState.LOST;
-            EndBattle();
-        }
-        else {
-            state = BattleState.PLAYERTURN;
-            PlayerTurn();
+            bool isDead = playerStats.TakeDamage(enemyDamage);
+
+            playerHUD.SetHP(playerStats.currentHP);
+            hitSound.Play();
+            // Shaky Effect
+            for ( int i = 0; i < 10; i++)
+            {
+                player.transform.position += new Vector3(5f, 0, 0);
+                yield return new WaitForSeconds(0.01f);
+                player.transform.position -= new Vector3(5f, 0, 0);
+                yield return new WaitForSeconds(0.01f);
+            }
+            
+            // Can use Write Method here-------
+            dialogueText.text = " You took " + enemyDamage + " damage.";
+
+            yield return new WaitForSeconds(3f);
+
+            if(isDead)
+            {
+                state = BattleState.LOST;
+                EnemyAttackIndicatorController.Instance.disableAllIndicators();
+                EndBattle();
+            }
+            else {
+                state = BattleState.PLAYERTURN;
+                int enemyAttackType = Random.Range(0, 2);
+                EnemyAttackIndicatorController.Instance.disableAllIndicators();
+                EnemyAttackIndicatorController.Instance.enableIndicator(enemyAttackType);
+                PlayerTurn();
+            }
         }
     }
 
