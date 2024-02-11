@@ -11,13 +11,16 @@ public class Stats: MonoBehaviour
     public int barrier;
     private int dmgTaken;
 
+    // Method for taking damage
     public bool TakeDamage(int dmg){
         dmgTaken = dmg;
         if (barrier > 0){
             barrier -= dmgTaken;
             if (barrier < 0){
-                dmgTaken = barrier;
+                dmgTaken = -1*barrier;
                 barrier = 0;
+            } else {
+                dmgTaken = 0;
             }
         }
         currentHP -= dmgTaken;
@@ -27,5 +30,18 @@ public class Stats: MonoBehaviour
         else {
             return false;
         }
+    }
+
+    // Method for healing
+    public void Heal(int hpHealed){
+        currentHP += hpHealed;
+        if (currentHP > maxHP){
+            currentHP = maxHP;
+        }
+    }
+
+    // Method for adding Barrier
+    public void AddBarrier(int barrierAdded){
+        barrier += barrierAdded;
     }
 }

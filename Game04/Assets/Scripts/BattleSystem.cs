@@ -61,7 +61,7 @@ public class BattleSystem : MonoBehaviour
     {
         bool isDead = enemyStats.TakeDamage(playerStats.damage);
 
-        enemyHUD.SetHP(enemyStats.currentHP);
+        enemyHUD.SetHP(enemyStats);
         hitSound.Play();
         // Shake Effect upon taking damage (Very nice)
         for ( int i = 0; i < 10; i++)
@@ -92,7 +92,7 @@ public class BattleSystem : MonoBehaviour
 
             bool isDead = playerStats.TakeDamage(enemyStats.damage);
 
-            playerHUD.SetHP(playerStats.currentHP);
+            playerHUD.SetHP(playerStats);
             hitSound.Play();
             // Shaky Effect
             for ( int i = 0; i < 10; i++)
@@ -130,7 +130,7 @@ public class BattleSystem : MonoBehaviour
 
             bool isDead = playerStats.TakeDamage(enemyDamage);
 
-            playerHUD.SetHP(playerStats.currentHP);
+            playerHUD.SetHP(playerStats);
             hitSound.Play();
             // Shaky Effect
             for ( int i = 0; i < 10; i++)
@@ -212,7 +212,7 @@ public class BattleSystem : MonoBehaviour
 
         bool isDead = enemyStats.TakeDamage(9999999);
 
-        enemyHUD.SetHP(enemyStats.currentHP);
+        enemyHUD.SetHP(enemyStats);
         hitSound.Play();
         for ( int i = 0; i < 10; i++)
         {
@@ -246,7 +246,7 @@ public class BattleSystem : MonoBehaviour
         yield return new WaitForSeconds(3f);
         dialogueInterface.GetComponent<Canvas>().enabled = false;
 
-        enemyHUD.SetHP(enemyStats.currentHP);
+        enemyHUD.SetHP(enemyStats);
         hitSound.Play();
         // Shaky Effect!
         for ( int i = 0; i < 10; i++)
@@ -269,6 +269,89 @@ public class BattleSystem : MonoBehaviour
 
     }
 
+
+    // Method for Cudgel Item - Needs Audio (my bad)
+    IEnumerator UseCudgel(){
+        bool isDead = enemyStats.TakeDamage(5);
+
+        dialogueInterface.GetComponent<Canvas>().enabled = true;
+        dialogueText.text = "You lifted the cudgel and hit your opponent";
+        yield return new WaitForSeconds(2.5f);
+        dialogueText.text = "Your strength isn't amazing but it did some damage";
+        yield return new WaitForSeconds(2.5f);
+        dialogueInterface.GetComponent<Canvas>().enabled = false;
+
+        enemyHUD.SetHP(enemyStats);
+        hitSound.Play();
+        // Shaky Effect!
+        for ( int i = 0; i < 10; i++)
+        {
+            enemy.transform.position += new Vector3(5f, 0, 0);
+            yield return new WaitForSeconds(0.01f);
+            enemy.transform.position -= new Vector3(5f, 0, 0);
+            yield return new WaitForSeconds(0.01f);
+        }
+        dialogueInterface.GetComponent<Canvas>().enabled = true;
+        dialogueText.text = enemyStats.charName + "Took 5 damage";
+        yield return new WaitForSeconds(3f);
+        if(isDead){
+            state = BattleState.WON;
+            EndBattle();
+        } else {
+            state = BattleState.ENEMYTURN;
+            StartCoroutine(EnemyTurn());
+        }
+
+    }
+
+
+    // Method for Magic Cloth Item - Needs Audio (my bad)
+    IEnumerator UseMagicCloth(){
+        if (playerStats.currentHP == playerStats.maxHP){
+            dialogueInterface.GetComponent<Canvas>().enabled = true;
+            dialogueText.text = "You used the Magic Cloth";
+            yield return new WaitForSeconds(2.5f);
+            dialogueText.text = "With no wounds to heal, it had no effect";
+            yield return new WaitForSeconds(2.5f);
+        } else {
+            playerStats.Heal(6);
+            dialogueInterface.GetComponent<Canvas>().enabled = true;
+            dialogueText.text = "You used the Magic Cloth";
+            yield return new WaitForSeconds(2.5f);
+            dialogueText.text = "Its warmth eased your pain";
+            yield return new WaitForSeconds(2.5f);
+            playerHUD.SetHP(playerStats);
+            dialogueText.text = "You healed 6 Hp";
+            yield return new WaitForSeconds(3f);
+        }
+    
+        state = BattleState.ENEMYTURN;
+        StartCoroutine(EnemyTurn());
+    }
+
+
+    // Method for Silver Hands Item - Needs Audio (my bad)
+    IEnumerator UseSilverHands(){
+        playerStats.AddBarrier(10);
+        dialogueInterface.GetComponent<Canvas>().enabled = true;
+        dialogueText.text = "The Silver Hands of the pure maiden";
+        yield return new WaitForSeconds(2.5f);
+        dialogueText.text = "Unfortunately, they're too heavy for you to bear";
+        yield return new WaitForSeconds(2.5f);
+        dialogueText.text = "But they offer protection against pain to come";
+        yield return new WaitForSeconds(2.5f);
+        dialogueInterface.GetComponent<Canvas>().enabled = false;
+
+        playerHUD.SetHP(playerStats);
+        hitSound.Play();
+        dialogueInterface.GetComponent<Canvas>().enabled = true;
+        dialogueText.text = "You gained 10 Barrier";
+        yield return new WaitForSeconds(3f);
+        
+        state = BattleState.ENEMYTURN;
+        StartCoroutine(EnemyTurn());
+    }
+
     //UI Element Methods -----------------------------------------------------------------------------
     public void OnGlockUsed(){
         closeAllInterface();
@@ -287,6 +370,36 @@ public class BattleSystem : MonoBehaviour
         }
 
         StartCoroutine(UseMirror());
+
+    }
+
+    public void OnCudgelUsed(){
+        closeAllInterface();
+        if(state != BattleState.PLAYERTURN){
+            return;
+        }
+
+        StartCoroutine(UseCudgel());
+
+    }
+
+    public void OnMagicClothUsed(){
+        closeAllInterface();
+        if(state != BattleState.PLAYERTURN){
+            return;
+        }
+
+        StartCoroutine(UseMagicCloth());
+
+    }
+
+    public void OnSilverHandsUsed(){
+        closeAllInterface();
+        if(state != BattleState.PLAYERTURN){
+            return;
+        }
+
+        StartCoroutine(UseSilverHands());
 
     }
     
