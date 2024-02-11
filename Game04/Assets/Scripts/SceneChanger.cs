@@ -17,6 +17,10 @@ public class SceneChanger : MonoBehaviour
     public void FadeToNextScene(){
         FadeToScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
+    public void FadeToSameScene(){
+        FadeToScene(SceneManager.GetActiveScene().buildIndex);
+    }
     
     public void FadeToScene(int sceneIndex){
         sceneToLoad = sceneIndex;
