@@ -10,6 +10,8 @@ public class BattleSystem : MonoBehaviour
 {
     public BattleState state;
     public Canvas dialogueInterface;
+    public GameObject redBookMarkContents;
+    public GameObject blueBookMarkContents;
     public Canvas choicesInterface;
     public Canvas inventoryInterface;
     public TextMeshProUGUI dialogueText;
@@ -35,6 +37,12 @@ public class BattleSystem : MonoBehaviour
     }
 
     void preIntro(){
+        if (Mark.bookmarkSelected == BookmarkSelected.RED){
+            redBookMarkContents.SetActive(true);
+        } else {
+            blueBookMarkContents.SetActive(true);
+        }
+        inventoryInterface.GetComponent<Canvas>().enabled = false;
         choicesInterface.GetComponent<Canvas>().enabled = false;
         EnemyAttackIndicatorController.Instance.enableIndicator(0);
         playerStats = player.GetComponent<Stats>();

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
+namespace Narrative
+{
     /// <summary>
     /// A utility class that parses text input from CSV (comma seperated values) for dialogue.
     /// </summary>
@@ -152,3 +154,4 @@ using UnityEngine;
             return sourceData;
         }
     }
+}

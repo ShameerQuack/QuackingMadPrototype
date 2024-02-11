@@ -12,6 +12,7 @@ public class SceneChanger : MonoBehaviour
 
     void Awake(){
         _instance = this;
+        Debug.Log(Mark.bookmarkSelected);
     }
 
     public void FadeToNextScene(){
