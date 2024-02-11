@@ -9,7 +9,6 @@ public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST }
 public class BattleSystem : MonoBehaviour
 {
     public BattleState state;
-    public GameObject userInterface;
     public Canvas dialogueInterface;
     public Canvas choicesInterface;
     public Canvas inventoryInterface;
@@ -168,6 +167,8 @@ public class BattleSystem : MonoBehaviour
             dialogueText.text = "You defeated the evil Snow White!";
         } else if (state == BattleState.LOST){
             dialogueText.text = "You were defeated.";
+            backgroundMusic.Pause();
+            GameOverOverlay.Instance.FadeToGameOver();
         }
     }
 
