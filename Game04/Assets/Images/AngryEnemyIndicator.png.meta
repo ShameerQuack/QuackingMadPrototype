@@ -3,35 +3,35 @@ guid: 5e40ab418430c124e9194e6a90864aaa
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4420269906999782665
-    second: AngryAttackIndicator_0
+      213: -3241351315552806351
+    second: AngryEnemyIndicator_0
   - first:
-      213: -4410296854163507991
-    second: AngryAttackIndicator_1
+      213: -5521168691427035051
+    second: AngryEnemyIndicator_1
   - first:
-      213: -3547387722808600851
-    second: AngryAttackIndicator_2
+      213: 3136148611241762028
+    second: AngryEnemyIndicator_2
   - first:
-      213: -3224593076179714915
-    second: AngryAttackIndicator_3
+      213: -3517269237378117212
+    second: AngryEnemyIndicator_3
   - first:
-      213: -6894041186627468904
-    second: AngryAttackIndicator_4
+      213: -6468372572100762910
+    second: AngryEnemyIndicator_4
   - first:
-      213: 7963205080274815092
-    second: AngryAttackIndicator_5
+      213: 7448855344839350591
+    second: AngryEnemyIndicator_5
   - first:
-      213: 4137784929350438522
-    second: AngryAttackIndicator_6
+      213: -5967018843255134742
+    second: AngryEnemyIndicator_6
   - first:
-      213: -469667167473456738
-    second: AngryAttackIndicator_7
+      213: 129522672251967475
+    second: AngryEnemyIndicator_7
   - first:
-      213: 3099473565823507626
-    second: AngryAttackIndicator_8
+      213: -1793096966857020339
+    second: AngryEnemyIndicator_8
   - first:
-      213: -6783941182554392567
-    second: AngryAttackIndicator_9
+      213: -3922033210601009908
+    second: AngryEnemyIndicator_9
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -114,6 +114,42 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -129,13 +165,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: AngryAttackIndicator_0
+      name: AngryEnemyIndicator_0
       rect:
         serializedVersion: 2
-        x: 241
-        y: 2433
-        width: 218
-        height: 198
+        x: 301
+        y: 2474
+        width: 109
+        height: 125
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,20 +179,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 90d22129f04f75d30800000000000000
-      internalID: 4420269906999782665
+      spriteID: 13ada34e6286403d0800000000000000
+      internalID: -3241351315552806351
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AngryAttackIndicator_1
+      name: AngryEnemyIndicator_1
       rect:
         serializedVersion: 2
-        x: 591
-        y: 2430
-        width: 218
-        height: 198
+        x: 648
+        y: 2469
+        width: 106
+        height: 118
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -164,20 +200,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9e4bf8db06a7bc2c0800000000000000
-      internalID: -4410296854163507991
+      spriteID: 558bb7ad35ed063b0800000000000000
+      internalID: -5521168691427035051
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AngryAttackIndicator_2
+      name: AngryEnemyIndicator_2
       rect:
         serializedVersion: 2
-        x: 872
-        y: 2439
-        width: 218
-        height: 198
+        x: 931
+        y: 2493
+        width: 109
+        height: 113
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -185,20 +221,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de6596539a525cec0800000000000000
-      internalID: -3547387722808600851
+      spriteID: cec56efbb86d58b20800000000000000
+      internalID: 3136148611241762028
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AngryAttackIndicator_3
+      name: AngryEnemyIndicator_3
       rect:
         serializedVersion: 2
-        x: 1131
-        y: 2445
-        width: 218
-        height: 198
+        x: 1187
+        y: 2497
+        width: 111
+        height: 101
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -206,20 +242,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d9cbf1d8ea1ff33d0800000000000000
-      internalID: -3224593076179714915
+      spriteID: 4a11bae8346203fc0800000000000000
+      internalID: -3517269237378117212
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AngryAttackIndicator_4
+      name: AngryEnemyIndicator_4
       rect:
         serializedVersion: 2
-        x: 1402
-        y: 2458
-        width: 218
-        height: 198
+        x: 1451
+        y: 2503
+        width: 116
+        height: 115
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -227,20 +263,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 891482421127350a0800000000000000
-      internalID: -6894041186627468904
+      spriteID: 2e2ed05aa69bb36a0800000000000000
+      internalID: -6468372572100762910
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AngryAttackIndicator_5
+      name: AngryEnemyIndicator_5
       rect:
         serializedVersion: 2
-        x: 250
-        y: 2183
-        width: 218
-        height: 198
+        x: 300
+        y: 2435
+        width: 33
+        height: 11
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -248,20 +284,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 478cd5364dcf28e60800000000000000
-      internalID: 7963205080274815092
+      spriteID: f395b6c6876af5760800000000000000
+      internalID: 7448855344839350591
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AngryAttackIndicator_6
+      name: AngryEnemyIndicator_6
       rect:
         serializedVersion: 2
-        x: 607
-        y: 2205
-        width: 218
-        height: 198
+        x: 305
+        y: 2222
+        width: 115
+        height: 126
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -269,20 +305,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a7ec5e6687d5c6930800000000000000
-      internalID: 4137784929350438522
+      spriteID: ae527b70af3e03da0800000000000000
+      internalID: -5967018843255134742
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AngryAttackIndicator_7
+      name: AngryEnemyIndicator_7
       rect:
         serializedVersion: 2
-        x: 888
-        y: 2208
-        width: 218
-        height: 198
+        x: 668
+        y: 2242
+        width: 102
+        height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -290,20 +326,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e99a41813386b79f0800000000000000
-      internalID: -469667167473456738
+      spriteID: 3f710f52f282cc100800000000000000
+      internalID: 129522672251967475
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AngryAttackIndicator_8
+      name: AngryEnemyIndicator_8
       rect:
         serializedVersion: 2
-        x: 1153
-        y: 2205
-        width: 218
-        height: 198
+        x: 947
+        y: 2252
+        width: 96
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -311,20 +347,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aac9f9159ca830b20800000000000000
-      internalID: 3099473565823507626
+      spriteID: d4c28a21fc3ad17e0800000000000000
+      internalID: -1793096966857020339
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AngryAttackIndicator_9
+      name: AngryEnemyIndicator_9
       rect:
         serializedVersion: 2
-        x: 1153
-        y: 2205
-        width: 218
-        height: 198
+        x: 1207
+        y: 2254
+        width: 105
+        height: 106
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -332,8 +368,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 908b3b4ff699ad1a0800000000000000
-      internalID: -6783941182554392567
+      spriteID: c0d87d423932299c0800000000000000
+      internalID: -3922033210601009908
       vertices: []
       indices: 
       edges: []

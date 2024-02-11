@@ -14,8 +14,6 @@ public class BattleSystem : MonoBehaviour
     public Canvas choicesInterface;
     public Canvas inventoryInterface;
     public TextMeshProUGUI dialogueText;
-    public TextMeshProUGUI playerHealthText;
-    public TextMeshProUGUI enemyHealthText;
     public GameObject player;
     public GameObject enemy;
     public BattleHUD playerHUD;
@@ -29,6 +27,7 @@ public class BattleSystem : MonoBehaviour
 
     Stats playerStats;
     Stats enemyStats;
+    private float enemyAttackModifier = 1.0f;
 
     void Start(){
         state = BattleState.START;
@@ -79,86 +78,23 @@ public class BattleSystem : MonoBehaviour
             EndBattle();
         } else {
             state = BattleState.ENEMYTURN;
-            StartCoroutine(EnemyTurn());
+            EnemyTurn();
         }
     }
 
     // Enemy Turn Method
-    IEnumerator EnemyTurn(){
+    void EnemyTurn(){
+        // Debuff Logic =============
+        switch (enemyStats.debuffState){
+            case Debuff.BIND:
+            enemyAttackModifier = 0.5f;
+            break;
+        }
+        // ==========================
         if(EnemyAttackIndicatorController.Instance.getEnabledIndicator() == 0) {
-            dialogueText.text = enemyStats.charName + " angrily attacks!";
-        
-            yield return new WaitForSeconds(3f);
-
-            bool isDead = playerStats.TakeDamage(enemyStats.damage);
-
-            playerHUD.SetHP(playerStats);
-            hitSound.Play();
-            // Shaky Effect
-            for ( int i = 0; i < 10; i++)
-            {
-                player.transform.position += new Vector3(5f, 0, 0);
-                yield return new WaitForSeconds(0.01f);
-                player.transform.position -= new Vector3(5f, 0, 0);
-                yield return new WaitForSeconds(0.01f);
-            }
-            
-            // Can use Write Method here-------
-            dialogueText.text = " You took " + enemyStats.damage + " damage.";
-
-            yield return new WaitForSeconds(3f);
-
-            if(isDead)
-            {
-                state = BattleState.LOST;
-                EnemyAttackIndicatorController.Instance.disableAllIndicators();
-                EndBattle();
-            }
-            else {
-                state = BattleState.PLAYERTURN;
-                int enemyAttackType = Random.Range(0, 2);
-                EnemyAttackIndicatorController.Instance.disableAllIndicators();
-                EnemyAttackIndicatorController.Instance.enableIndicator(enemyAttackType);
-                PlayerTurn();
-            }
+            StartCoroutine(EnemyAttack0());
         } else if (EnemyAttackIndicatorController.Instance.getEnabledIndicator() == 1) {
-            dialogueText.text = enemyStats.charName + " recklessly attacks!";
-
-            int enemyDamage= Random.Range(0, 50);
-        
-            yield return new WaitForSeconds(3f);
-
-            bool isDead = playerStats.TakeDamage(enemyDamage);
-
-            playerHUD.SetHP(playerStats);
-            hitSound.Play();
-            // Shaky Effect
-            for ( int i = 0; i < 10; i++)
-            {
-                player.transform.position += new Vector3(5f, 0, 0);
-                yield return new WaitForSeconds(0.01f);
-                player.transform.position -= new Vector3(5f, 0, 0);
-                yield return new WaitForSeconds(0.01f);
-            }
-            
-            // Can use Write Method here-------
-            dialogueText.text = " You took " + enemyDamage + " damage.";
-
-            yield return new WaitForSeconds(3f);
-
-            if(isDead)
-            {
-                state = BattleState.LOST;
-                EnemyAttackIndicatorController.Instance.disableAllIndicators();
-                EndBattle();
-            }
-            else {
-                state = BattleState.PLAYERTURN;
-                int enemyAttackType = Random.Range(0, 2);
-                EnemyAttackIndicatorController.Instance.disableAllIndicators();
-                EnemyAttackIndicatorController.Instance.enableIndicator(enemyAttackType);
-                PlayerTurn();
-            }
+            StartCoroutine(EnemyAttack1());
         }
     }
 
@@ -173,6 +109,25 @@ public class BattleSystem : MonoBehaviour
 
     // Method to start PlayerTurn
     void PlayerTurn(){
+        // Reduces Duration of Buffs and Debuffs
+        if (playerStats.buffDuration > 0) {
+            playerStats.buffDuration -= 1;
+            if (playerStats.buffDuration == 0){playerStats.buffState = Buff.NONE;}
+            }
+        if (enemyStats.buffDuration > 0) {
+            enemyStats.buffDuration -= 1;
+            if (enemyStats.buffDuration == 0){enemyStats.buffState = Buff.NONE;}
+            }
+        if (playerStats.debuffDuration > 0) {
+            playerStats.debuffDuration -= 1;
+            if (playerStats.debuffDuration == 0){playerStats.debuffState = Debuff.NONE;}
+            }
+        if (enemyStats.debuffDuration > 0) {
+            enemyStats.debuffDuration -= 1;
+            if (enemyStats.debuffDuration == 0){enemyStats.debuffState = Debuff.NONE;}
+            }
+        // =======================================
+
         dialogueInterface.GetComponent<Canvas>().enabled = false;
         choicesInterface.GetComponent<Canvas>().enabled = true;
         EventSystem.current.SetSelectedGameObject(null);
@@ -197,6 +152,101 @@ public class BattleSystem : MonoBehaviour
         choicesInterface.GetComponent<Canvas>().enabled = false;
         dialogueInterface.GetComponent<Canvas>().enabled = false;
         inventoryInterface.GetComponent<Canvas>().enabled = false;
+    }
+
+    // Methods for Enemy Actions ===================================================================
+    IEnumerator EnemyAttack0(){
+        dialogueText.text = enemyStats.charName + " angrily attacks!";
+        yield return new WaitForSeconds(3f);
+        bool isDead = playerStats.TakeDamage((int)(enemyStats.damage*enemyAttackModifier));
+        playerHUD.SetHP(playerStats);
+
+        if (playerStats.buffState==Buff.REFLECT){
+            if(enemyStats.TakeDamage((int)(enemyStats.damage*enemyAttackModifier*0.5))){
+                enemyStats.currentHP = 1;
+            }
+            enemyHUD.SetHP(enemyStats);
+        }
+
+        hitSound.Play();
+        // Shaky Effect
+        for ( int i = 0; i < 10; i++){
+            player.transform.position += new Vector3(5f, 0, 0);
+            yield return new WaitForSeconds(0.01f);
+            player.transform.position -= new Vector3(5f, 0, 0);
+            yield return new WaitForSeconds(0.01f);
+        }
+        // Can use Write Method here-------
+        dialogueText.text = " You took " + ((int)(enemyStats.damage*enemyAttackModifier)).ToString() + " damage.";
+        yield return new WaitForSeconds(3f);
+        enemyAttackModifier = 1;
+        if(isDead){
+            state = BattleState.LOST;
+            EnemyAttackIndicatorController.Instance.disableAllIndicators();
+            EndBattle();
+        } else {
+            state = BattleState.PLAYERTURN;
+            int enemyAttackType = Random.Range(0, 2);
+            EnemyAttackIndicatorController.Instance.disableAllIndicators();
+            EnemyAttackIndicatorController.Instance.enableIndicator(enemyAttackType);
+            PlayerTurn();
+        }
+    }
+
+    IEnumerator EnemyAttack1(){
+        dialogueText.text = enemyStats.charName + " recklessly attacks!";
+        int enemyDamage= Random.Range(0, 16);
+        yield return new WaitForSeconds(3f);
+        bool isDead = playerStats.TakeDamage((int)(enemyDamage*enemyAttackModifier));
+        playerHUD.SetHP(playerStats);
+
+        if (playerStats.buffState==Buff.REFLECT){
+            if(enemyStats.TakeDamage((int)(enemyDamage*enemyAttackModifier*0.5))){
+                enemyStats.currentHP = 1;
+            }
+            enemyHUD.SetHP(enemyStats);
+        }
+
+        hitSound.Play();
+        // Shaky Effect
+        for ( int i = 0; i < 10; i++){
+            player.transform.position += new Vector3(5f, 0, 0);
+            yield return new WaitForSeconds(0.01f);
+            player.transform.position -= new Vector3(5f, 0, 0);
+            yield return new WaitForSeconds(0.01f);
+        }
+        // Can use Write Method here-------
+        dialogueText.text = " You took " + ((int)(enemyDamage*enemyAttackModifier)).ToString() + " damage.";
+        yield return new WaitForSeconds(3f);
+        enemyAttackModifier = 1;
+        if(isDead){
+            state = BattleState.LOST;
+            EnemyAttackIndicatorController.Instance.disableAllIndicators();
+            EndBattle();
+        } else {
+            state = BattleState.PLAYERTURN;
+            int enemyAttackType = Random.Range(0, 2);
+            EnemyAttackIndicatorController.Instance.disableAllIndicators();
+            EnemyAttackIndicatorController.Instance.enableIndicator(enemyAttackType);
+            PlayerTurn();
+        }
+    }
+
+    // This one isn't used in the Tech Demo so ignore it :D
+    IEnumerator EnemyAttack2(){
+        dialogueText.text = enemyStats.charName + "Created a barrier";
+        yield return new WaitForSeconds(3f);
+        enemyStats.AddBarrier(10);
+        enemyHUD.SetHP(enemyStats);
+        // Can use Write Method here-------
+        dialogueText.text = enemyStats.charName + " gained 10 barrier";
+        yield return new WaitForSeconds(3f);
+        
+        state = BattleState.PLAYERTURN;
+        int enemyAttackType = Random.Range(0, 2);
+        EnemyAttackIndicatorController.Instance.disableAllIndicators();
+        EnemyAttackIndicatorController.Instance.enableIndicator(enemyAttackType);
+        PlayerTurn();
     }
 
     // Method for Items -------------------------------------------------------
@@ -229,44 +279,32 @@ public class BattleSystem : MonoBehaviour
             EndBattle();
         } else {
             state = BattleState.ENEMYTURN;
-            StartCoroutine(EnemyTurn());
+            EnemyTurn();
         }
 
     }
     // Method for Mirror Item - Needs Audio (my bad)
     IEnumerator UseMirror(){
-        bool isDead = enemyStats.TakeDamage(299);
-
+        playerStats.applyBuff(Buff.REFLECT, 2);
         dialogueInterface.GetComponent<Canvas>().enabled = true;
+        dialogueText.text = "You used the Mirror's reflective magic...";
+        yield return new WaitForSeconds(2.5f);
         dialogueText.text = enemyStats.charName + " Looked at the Mirror";
         yield return new WaitForSeconds(2.5f);
         dialogueText.text = "It seems to have reminded her of something";
         yield return new WaitForSeconds(2.5f);
         dialogueText.text = "She seems a bit...sad...";
         yield return new WaitForSeconds(3f);
+        // I wanna reward the player for using this item by inflicting an additional debuff to Snow White called DEFENSELESS but we'll see to it later
         dialogueInterface.GetComponent<Canvas>().enabled = false;
+        playerHUD.SetHP(playerStats);
 
-        enemyHUD.SetHP(enemyStats);
-        hitSound.Play();
-        // Shaky Effect!
-        for ( int i = 0; i < 10; i++)
-        {
-            enemy.transform.position += new Vector3(5f, 0, 0);
-            yield return new WaitForSeconds(0.01f);
-            enemy.transform.position -= new Vector3(5f, 0, 0);
-            yield return new WaitForSeconds(0.01f);
-        }
         dialogueInterface.GetComponent<Canvas>().enabled = true;
-        dialogueText.text = enemyStats.charName + "Took 299 Emotional Damage lol";
+        dialogueText.text = "You will partially <b>REFLECT</b> damage for two turns";
         yield return new WaitForSeconds(3f);
-        if(isDead){
-            state = BattleState.WON;
-            EndBattle();
-        } else {
-            state = BattleState.ENEMYTURN;
-            StartCoroutine(EnemyTurn());
-        }
 
+        state = BattleState.ENEMYTURN;
+        EnemyTurn();
     }
 
 
@@ -299,7 +337,7 @@ public class BattleSystem : MonoBehaviour
             EndBattle();
         } else {
             state = BattleState.ENEMYTURN;
-            StartCoroutine(EnemyTurn());
+            EnemyTurn();
         }
 
     }
@@ -326,7 +364,7 @@ public class BattleSystem : MonoBehaviour
         }
     
         state = BattleState.ENEMYTURN;
-        StartCoroutine(EnemyTurn());
+        EnemyTurn();
     }
 
 
@@ -347,9 +385,29 @@ public class BattleSystem : MonoBehaviour
         dialogueInterface.GetComponent<Canvas>().enabled = true;
         dialogueText.text = "You gained 10 Barrier";
         yield return new WaitForSeconds(3f);
-        
+
         state = BattleState.ENEMYTURN;
-        StartCoroutine(EnemyTurn());
+        EnemyTurn();
+    }
+
+    // Method for Rapunzels Hair Item - Needs Audio (my bad)
+    IEnumerator UseRapunzelHair(){
+        enemyStats.applyDebuff(Debuff.BIND, 3);
+        dialogueInterface.GetComponent<Canvas>().enabled = true;
+        dialogueText.text = "The Magic Hair binds your opponent";
+        yield return new WaitForSeconds(2.5f);
+        dialogueText.text = "With movement restricted, her attacks are weakened";
+        yield return new WaitForSeconds(2.5f);
+        dialogueInterface.GetComponent<Canvas>().enabled = false;
+
+        enemyHUD.SetHP(enemyStats);
+        hitSound.Play();
+        dialogueInterface.GetComponent<Canvas>().enabled = true;
+        dialogueText.text = enemyStats.charName + " <b>Bound</b> for 3 turns";
+        yield return new WaitForSeconds(3f);
+
+        state = BattleState.ENEMYTURN;
+        EnemyTurn();
     }
 
     //UI Element Methods -----------------------------------------------------------------------------
@@ -400,6 +458,16 @@ public class BattleSystem : MonoBehaviour
         }
 
         StartCoroutine(UseSilverHands());
+
+    }
+
+    public void OnRapunzelHairUsed(){
+        closeAllInterface();
+        if(state != BattleState.PLAYERTURN){
+            return;
+        }
+
+        StartCoroutine(UseRapunzelHair());
 
     }
     

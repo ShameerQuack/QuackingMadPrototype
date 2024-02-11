@@ -3,38 +3,80 @@ guid: 9de7a4eca3c76db4aaf44af94593fb5a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3726873267830863710
-    second: unnamed (4)_1
+      213: -8793793500014651820
+    second: StressedAttacksIndicator 1_0
   - first:
-      213: 7104602972739590052
-    second: unnamed (4)_2
+      213: 195863423661939670
+    second: StressedAttacksIndicator 1_1
   - first:
-      213: 7582232286081450620
-    second: unnamed (4)_3
+      213: 2231981524786292265
+    second: StressedAttacksIndicator 1_2
   - first:
-      213: 936213869690755485
-    second: unnamed (4)_4
+      213: -7389967750965994625
+    second: StressedAttacksIndicator 1_3
   - first:
-      213: 7425723457224814626
-    second: unnamed (4)_5
+      213: 110522481222442013
+    second: StressedAttacksIndicator 1_4
   - first:
-      213: 999483360179350490
-    second: unnamed (4)_6
+      213: -2332432892110401871
+    second: StressedAttacksIndicator 1_5
   - first:
-      213: 6187402748518539161
-    second: unnamed (4)_7
+      213: 7292445522161471612
+    second: StressedAttacksIndicator 1_6
   - first:
-      213: 6669851567688546261
-    second: unnamed (4)_8
+      213: 3936544397556991302
+    second: StressedAttacksIndicator 1_7
   - first:
-      213: 5670275148982474699
-    second: unnamed (4)_9
+      213: -2432019505484522514
+    second: StressedAttacksIndicator 1_8
   - first:
-      213: 3290977193218880722
-    second: unnamed (4)_10
+      213: 2627312519331886389
+    second: StressedAttacksIndicator 1_9
   - first:
-      213: 5067270990130708082
-    second: unnamed (4)_11
+      213: -6344209810109994627
+    second: StressedAttacksIndicator 1_10
+  - first:
+      213: -2782248959740217746
+    second: StressedAttacksIndicator 1_11
+  - first:
+      213: 7388379399486678022
+    second: StressedAttacksIndicator 1_12
+  - first:
+      213: 3397166725444118924
+    second: StressedAttacksIndicator 1_13
+  - first:
+      213: -6818164568332989726
+    second: StressedAttacksIndicator 1_14
+  - first:
+      213: 1449871165309058915
+    second: StressedAttacksIndicator 1_15
+  - first:
+      213: 5075481458466479072
+    second: StressedAttacksIndicator 1_16
+  - first:
+      213: 6994026135448050627
+    second: StressedAttacksIndicator 1_17
+  - first:
+      213: -8854204332178910583
+    second: StressedAttacksIndicator 1_18
+  - first:
+      213: 6539543821436414872
+    second: StressedAttacksIndicator 1_19
+  - first:
+      213: 1219270190037997264
+    second: StressedAttacksIndicator 1_20
+  - first:
+      213: 1487526966631947708
+    second: StressedAttacksIndicator 1_21
+  - first:
+      213: -1884915157389560827
+    second: StressedAttacksIndicator 1_22
+  - first:
+      213: 3891551283453316035
+    second: StressedAttacksIndicator 1_23
+  - first:
+      213: 6833528203934590088
+    second: StressedAttacksIndicator 1_24
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -117,6 +159,42 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -132,13 +210,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: unnamed (4)_0
+      name: StressedAttacksIndicator 1_0
       rect:
         serializedVersion: 2
-        x: 150
-        y: 2300
-        width: 268
-        height: 309
+        x: 197
+        y: 2332
+        width: 177
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -146,20 +224,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 676a0b4986997d740800000000000000
-      internalID: 5176774971135927926
+      spriteID: 456dc7b376b26f580800000000000000
+      internalID: -8793793500014651820
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: unnamed (4)_1
+      name: StressedAttacksIndicator 1_1
       rect:
         serializedVersion: 2
-        x: 450
-        y: 2344
-        width: 227
-        height: 274
+        x: 490
+        y: 2382
+        width: 151
+        height: 183
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -167,20 +245,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a8ca0c328c774cc0800000000000000
-      internalID: -3726873267830863710
+      spriteID: 6db9cdffeb8d7b200800000000000000
+      internalID: 195863423661939670
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: unnamed (4)_2
+      name: StressedAttacksIndicator 1_2
       rect:
         serializedVersion: 2
-        x: 756
-        y: 2392
-        width: 180
-        height: 223
+        x: 796
+        y: 2419
+        width: 119
+        height: 160
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -188,20 +266,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4a7d35c03ce989260800000000000000
-      internalID: 7104602972739590052
+      spriteID: 9262f1a0f5799fe10800000000000000
+      internalID: 2231981524786292265
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: unnamed (4)_3
+      name: StressedAttacksIndicator 1_3
       rect:
         serializedVersion: 2
-        x: 1056
-        y: 2398
-        width: 180
-        height: 223
+        x: 1095
+        y: 2434
+        width: 97
+        height: 149
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -209,20 +287,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c7202608710893960800000000000000
-      internalID: 7582232286081450620
+      spriteID: f7b5416fb7f817990800000000000000
+      internalID: -7389967750965994625
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: unnamed (4)_4
+      name: StressedAttacksIndicator 1_4
       rect:
         serializedVersion: 2
-        x: 1337
-        y: 2401
-        width: 180
-        height: 223
+        x: 1375
+        y: 2442
+        width: 116
+        height: 145
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -230,20 +308,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d9916b0ed891efc00800000000000000
-      internalID: 936213869690755485
+      spriteID: d1c55f07c97a88100800000000000000
+      internalID: 110522481222442013
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: unnamed (4)_5
+      name: StressedAttacksIndicator 1_5
       rect:
         serializedVersion: 2
-        x: 1608
-        y: 2417
-        width: 180
-        height: 223
+        x: 1638
+        y: 2465
+        width: 125
+        height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -251,104 +329,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 220bb2424287d0760800000000000000
-      internalID: 7425723457224814626
+      spriteID: 1be825374a881afd0800000000000000
+      internalID: -2332432892110401871
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: unnamed (4)_6
+      name: StressedAttacksIndicator 1_6
       rect:
         serializedVersion: 2
-        x: 166
-        y: 2054
-        width: 180
-        height: 223
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: adb676212d0eedd00800000000000000
-      internalID: 999483360179350490
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: unnamed (4)_7
-      rect:
-        serializedVersion: 2
-        x: 459
-        y: 2057
-        width: 180
-        height: 223
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 99f19bb74021ed550800000000000000
-      internalID: 6187402748518539161
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: unnamed (4)_8
-      rect:
-        serializedVersion: 2
-        x: 765
-        y: 2063
-        width: 180
-        height: 223
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5d778a499a2109c50800000000000000
-      internalID: 6669851567688546261
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: unnamed (4)_9
-      rect:
-        serializedVersion: 2
-        x: 1062
-        y: 2079
-        width: 180
-        height: 223
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bc753d1a43dd0be40800000000000000
-      internalID: 5670275148982474699
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: unnamed (4)_10
-      rect:
-        serializedVersion: 2
-        x: 1346
+        x: 191
         y: 2098
-        width: 180
-        height: 223
+        width: 117
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -356,20 +350,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2d439b52256ebad20800000000000000
-      internalID: 3290977193218880722
+      spriteID: c70925cb098f33560800000000000000
+      internalID: 7292445522161471612
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: unnamed (4)_11
+      name: StressedAttacksIndicator 1_7
       rect:
         serializedVersion: 2
-        x: 1346
-        y: 2098
-        width: 180
-        height: 223
+        x: 498
+        y: 2095
+        width: 115
+        height: 148
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -377,8 +371,365 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 27ef1633e10925640800000000000000
-      internalID: 5067270990130708082
+      spriteID: 64540fad54a61a630800000000000000
+      internalID: 3936544397556991302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StressedAttacksIndicator 1_8
+      rect:
+        serializedVersion: 2
+        x: 784
+        y: 2099
+        width: 164
+        height: 164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eeb16c8252bbf3ed0800000000000000
+      internalID: -2432019505484522514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StressedAttacksIndicator 1_9
+      rect:
+        serializedVersion: 2
+        x: 1095
+        y: 2118
+        width: 125
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 535b6b4f0d6167420800000000000000
+      internalID: 2627312519331886389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StressedAttacksIndicator 1_10
+      rect:
+        serializedVersion: 2
+        x: 1391
+        y: 2123
+        width: 91
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7968df6ac6d4f7a0800000000000000
+      internalID: -6344209810109994627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StressedAttacksIndicator 1_11
+      rect:
+        serializedVersion: 2
+        x: 1628
+        y: 2152
+        width: 147
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e66fbf5ef477369d0800000000000000
+      internalID: -2782248959740217746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StressedAttacksIndicator 1_12
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 1803
+        width: 117
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 604a7342bebc88660800000000000000
+      internalID: 7388379399486678022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StressedAttacksIndicator 1_13
+      rect:
+        serializedVersion: 2
+        x: 469
+        y: 1835
+        width: 143
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c89afd84329252f20800000000000000
+      internalID: 3397166725444118924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StressedAttacksIndicator 1_14
+      rect:
+        serializedVersion: 2
+        x: 808
+        y: 1811
+        width: 129
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ea8b5403730161a0800000000000000
+      internalID: -6818164568332989726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StressedAttacksIndicator 1_15
+      rect:
+        serializedVersion: 2
+        x: 1087
+        y: 1822
+        width: 141
+        height: 164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36ff352a42afe1410800000000000000
+      internalID: 1449871165309058915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StressedAttacksIndicator 1_16
+      rect:
+        serializedVersion: 2
+        x: 1390
+        y: 1843
+        width: 108
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ebd9f3de7bbf6640800000000000000
+      internalID: 5075481458466479072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StressedAttacksIndicator 1_17
+      rect:
+        serializedVersion: 2
+        x: 1654
+        y: 1871
+        width: 121
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cbdd29d6b5cf0160800000000000000
+      internalID: 6994026135448050627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StressedAttacksIndicator 1_18
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 1557
+        width: 137
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98250cb421c8f1580800000000000000
+      internalID: -8854204332178910583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StressedAttacksIndicator 1_19
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 1536
+        width: 126
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89b61d5257021ca50800000000000000
+      internalID: 6539543821436414872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StressedAttacksIndicator 1_20
+      rect:
+        serializedVersion: 2
+        x: 813
+        y: 1544
+        width: 115
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d6107227c7bbe010800000000000000
+      internalID: 1219270190037997264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StressedAttacksIndicator 1_21
+      rect:
+        serializedVersion: 2
+        x: 1095
+        y: 1567
+        width: 122
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbd59e715e1c4a410800000000000000
+      internalID: 1487526966631947708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StressedAttacksIndicator 1_22
+      rect:
+        serializedVersion: 2
+        x: 1388
+        y: 1567
+        width: 147
+        height: 191
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 504bb0ca6af67d5e0800000000000000
+      internalID: -1884915157389560827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StressedAttacksIndicator 1_23
+      rect:
+        serializedVersion: 2
+        x: 1664
+        y: 1572
+        width: 143
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cb43732641910630800000000000000
+      internalID: 3891551283453316035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StressedAttacksIndicator 1_24
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 1313
+        width: 120
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 884622622b195de50800000000000000
+      internalID: 6833528203934590088
       vertices: []
       indices: 
       edges: []
