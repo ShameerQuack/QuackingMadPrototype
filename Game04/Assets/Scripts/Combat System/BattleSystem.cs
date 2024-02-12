@@ -140,8 +140,9 @@ public class BattleSystem : MonoBehaviour
         // =======================================
 
         dialogueInterface.GetComponent<Canvas>().enabled = false;
-        choicesInterface.GetComponent<Canvas>().enabled = true;
+        //choicesInterface.GetComponent<Canvas>().enabled = true;
         EventSystem.current.SetSelectedGameObject(null);
+        OnInventoryButton();
     }
 
     // Method to write text in dialogue box (Unused right now)
