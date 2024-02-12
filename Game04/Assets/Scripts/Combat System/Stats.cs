@@ -17,6 +17,8 @@ public class Stats: MonoBehaviour
     public Debuff debuffState;
     public int debuffDuration;
 
+    public Sprite ohNoFellDown;
+
     // Method for taking damage
     public bool TakeDamage(int dmg){
         dmgTaken = dmg;
@@ -31,6 +33,8 @@ public class Stats: MonoBehaviour
         }
         currentHP -= dmgTaken;
         if (currentHP <= 0){
+            currentHP = 0;
+            gameObject.GetComponent<SpriteRenderer>().sprite = ohNoFellDown;
             return true;
         }
         else {
