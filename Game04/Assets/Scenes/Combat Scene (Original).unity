@@ -320,8 +320,6 @@ MonoBehaviour:
   choicesInterface: {fileID: 1175571623}
   inventoryInterface: {fileID: 717513217}
   dialogueText: {fileID: 731739624}
-  playerHealthText: {fileID: 0}
-  enemyHealthText: {fileID: 0}
   player: {fileID: 1523302813361025018}
   enemy: {fileID: 3433206229451943654}
   playerHUD: {fileID: 1523302814699495476}
@@ -1330,7 +1328,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 18.718597
+  orthographic size: 19.716982
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1437,10 +1435,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1376203706}
     m_Modifications:
+    - target: {fileID: 4610134146336811936, guid: e0b2d924fc73d3c4ea080e1de158c508,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1515320167287597893, guid: 8b7d8f8650ddc974f9edf11ec316c191,
+        type: 3}
     - target: {fileID: 4610134146336811949, guid: e0b2d924fc73d3c4ea080e1de158c508,
         type: 3}
       propertyPath: m_Name
-      value: Glock (1)
+      value: Cloth
       objectReference: {fileID: 0}
     - target: {fileID: 4610134146336811950, guid: e0b2d924fc73d3c4ea080e1de158c508,
         type: 3}
@@ -1552,6 +1556,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 355894152}
+    - target: {fileID: 4610134146336811951, guid: e0b2d924fc73d3c4ea080e1de158c508,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnMagicClothUsed
+      objectReference: {fileID: 0}
+    - target: {fileID: 4610134147907054417, guid: e0b2d924fc73d3c4ea080e1de158c508,
+        type: 3}
+      propertyPath: m_text
+      value: Magic Cloth
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0b2d924fc73d3c4ea080e1de158c508, type: 3}
 --- !u!224 &553224883 stripped
@@ -2774,7 +2788,6 @@ RectTransform:
   - {fileID: 1661516205}
   - {fileID: 897482694}
   - {fileID: 2038712664}
-  - {fileID: 1377512596}
   m_Father: {fileID: 364630452}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3266,136 +3279,6 @@ MonoBehaviour:
   m_Spacing: {x: 1, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
---- !u!1001 &1377512595
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 968933043}
-    m_Modifications:
-    - target: {fileID: 4610134146336811949, guid: e0b2d924fc73d3c4ea080e1de158c508,
-        type: 3}
-      propertyPath: m_Name
-      value: Glock (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4610134146336811950, guid: e0b2d924fc73d3c4ea080e1de158c508,
-        type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4610134146336811950, guid: e0b2d924fc73d3c4ea080e1de158c508,
-        type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4610134146336811950, guid: e0b2d924fc73d3c4ea080e1de158c508,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4610134146336811950, guid: e0b2d924fc73d3c4ea080e1de158c508,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4610134146336811950, guid: e0b2d924fc73d3c4ea080e1de158c508,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4610134146336811950, guid: e0b2d924fc73d3c4ea080e1de158c508,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4610134146336811950, guid: e0b2d924fc73d3c4ea080e1de158c508,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4610134146336811950, guid: e0b2d924fc73d3c4ea080e1de158c508,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 85
-      objectReference: {fileID: 0}
-    - target: {fileID: 4610134146336811950, guid: e0b2d924fc73d3c4ea080e1de158c508,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 96
-      objectReference: {fileID: 0}
-    - target: {fileID: 4610134146336811950, guid: e0b2d924fc73d3c4ea080e1de158c508,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4610134146336811950, guid: e0b2d924fc73d3c4ea080e1de158c508,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4610134146336811950, guid: e0b2d924fc73d3c4ea080e1de158c508,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4610134146336811950, guid: e0b2d924fc73d3c4ea080e1de158c508,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4610134146336811950, guid: e0b2d924fc73d3c4ea080e1de158c508,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4610134146336811950, guid: e0b2d924fc73d3c4ea080e1de158c508,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4610134146336811950, guid: e0b2d924fc73d3c4ea080e1de158c508,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4610134146336811950, guid: e0b2d924fc73d3c4ea080e1de158c508,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 298.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4610134146336811950, guid: e0b2d924fc73d3c4ea080e1de158c508,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -98
-      objectReference: {fileID: 0}
-    - target: {fileID: 4610134146336811950, guid: e0b2d924fc73d3c4ea080e1de158c508,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4610134146336811950, guid: e0b2d924fc73d3c4ea080e1de158c508,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4610134146336811950, guid: e0b2d924fc73d3c4ea080e1de158c508,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4610134146336811951, guid: e0b2d924fc73d3c4ea080e1de158c508,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 355894152}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e0b2d924fc73d3c4ea080e1de158c508, type: 3}
---- !u!224 &1377512596 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4610134146336811950, guid: e0b2d924fc73d3c4ea080e1de158c508,
-    type: 3}
-  m_PrefabInstance: {fileID: 1377512595}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1406105283
 GameObject:
   m_ObjectHideFlags: 0
@@ -3891,10 +3774,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1376203706}
     m_Modifications:
+    - target: {fileID: 4610134146336811936, guid: e0b2d924fc73d3c4ea080e1de158c508,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 8660498135579648061, guid: 8b7d8f8650ddc974f9edf11ec316c191,
+        type: 3}
     - target: {fileID: 4610134146336811949, guid: e0b2d924fc73d3c4ea080e1de158c508,
         type: 3}
       propertyPath: m_Name
-      value: Glock (2)
+      value: Silver Hands
       objectReference: {fileID: 0}
     - target: {fileID: 4610134146336811950, guid: e0b2d924fc73d3c4ea080e1de158c508,
         type: 3}
@@ -4006,6 +3895,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 355894152}
+    - target: {fileID: 4610134146336811951, guid: e0b2d924fc73d3c4ea080e1de158c508,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnSilverHandsUsed
+      objectReference: {fileID: 0}
+    - target: {fileID: 4610134147907054417, guid: e0b2d924fc73d3c4ea080e1de158c508,
+        type: 3}
+      propertyPath: m_text
+      value: Silver Hands
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0b2d924fc73d3c4ea080e1de158c508, type: 3}
 --- !u!224 &1613312181 stripped
@@ -4965,10 +4864,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1376203706}
     m_Modifications:
+    - target: {fileID: 4610134146336811936, guid: e0b2d924fc73d3c4ea080e1de158c508,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 6892274491808584661, guid: 8b7d8f8650ddc974f9edf11ec316c191,
+        type: 3}
     - target: {fileID: 4610134146336811949, guid: e0b2d924fc73d3c4ea080e1de158c508,
         type: 3}
       propertyPath: m_Name
-      value: Glock
+      value: Cudgel
       objectReference: {fileID: 0}
     - target: {fileID: 4610134146336811950, guid: e0b2d924fc73d3c4ea080e1de158c508,
         type: 3}
@@ -5080,6 +4985,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 355894152}
+    - target: {fileID: 4610134146336811951, guid: e0b2d924fc73d3c4ea080e1de158c508,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnCudgelUsed
+      objectReference: {fileID: 0}
+    - target: {fileID: 4610134147907054417, guid: e0b2d924fc73d3c4ea080e1de158c508,
+        type: 3}
+      propertyPath: m_text
+      value: Cudgel
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0b2d924fc73d3c4ea080e1de158c508, type: 3}
 --- !u!224 &2000368735 stripped
@@ -5228,10 +5143,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 968933043}
     m_Modifications:
+    - target: {fileID: 4610134146336811936, guid: e0b2d924fc73d3c4ea080e1de158c508,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5823312690349662042, guid: 8b7d8f8650ddc974f9edf11ec316c191,
+        type: 3}
     - target: {fileID: 4610134146336811949, guid: e0b2d924fc73d3c4ea080e1de158c508,
         type: 3}
       propertyPath: m_Name
-      value: Glock (1)
+      value: Hair
       objectReference: {fileID: 0}
     - target: {fileID: 4610134146336811950, guid: e0b2d924fc73d3c4ea080e1de158c508,
         type: 3}
@@ -5343,6 +5264,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 355894152}
+    - target: {fileID: 4610134146336811951, guid: e0b2d924fc73d3c4ea080e1de158c508,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnRapunzelHairUsed
+      objectReference: {fileID: 0}
+    - target: {fileID: 4610134147907054417, guid: e0b2d924fc73d3c4ea080e1de158c508,
+        type: 3}
+      propertyPath: m_text
+      value: Rapunzel's Hair
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0b2d924fc73d3c4ea080e1de158c508, type: 3}
 --- !u!224 &2038712664 stripped
@@ -5992,7 +5923,7 @@ PrefabInstance:
     - target: {fileID: 3168279855799283894, guid: adc140eaeee9ff94b99346f3b53344b5,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.5000324
+      value: 2.500061
       objectReference: {fileID: 0}
     - target: {fileID: 3168279855799283894, guid: adc140eaeee9ff94b99346f3b53344b5,
         type: 3}
@@ -6039,10 +5970,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charName: Quacker
-  damage: 20
-  maxHP: 100
-  currentHP: 60
+  damage: 3
+  maxHP: 20
+  currentHP: 20
   barrier: 0
+  buffState: 0
+  buffDuration: 0
+  debuffState: 0
+  debuffDuration: 0
 --- !u!4 &3433206229451943652
 Transform:
   m_ObjectHideFlags: 0
@@ -6139,10 +6074,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charName: Snow White
-  damage: 100
-  maxHP: 300
-  currentHP: 300
-  barrier: 0
+  damage: 6
+  maxHP: 30
+  currentHP: 30
+  barrier: 10
+  buffState: 0
+  buffDuration: 0
+  debuffState: 0
+  debuffDuration: 0
 --- !u!224 &4525371813890723158 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3168279855799283894, guid: adc140eaeee9ff94b99346f3b53344b5,
@@ -6156,10 +6095,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 968933043}
     m_Modifications:
+    - target: {fileID: 4610134146336811936, guid: e0b2d924fc73d3c4ea080e1de158c508,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 3627848756102862410, guid: 8b7d8f8650ddc974f9edf11ec316c191,
+        type: 3}
     - target: {fileID: 4610134146336811949, guid: e0b2d924fc73d3c4ea080e1de158c508,
         type: 3}
       propertyPath: m_Name
-      value: Glock
+      value: Mirror
       objectReference: {fileID: 0}
     - target: {fileID: 4610134146336811950, guid: e0b2d924fc73d3c4ea080e1de158c508,
         type: 3}
@@ -6271,6 +6216,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 355894152}
+    - target: {fileID: 4610134146336811951, guid: e0b2d924fc73d3c4ea080e1de158c508,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnMirrorUsed
+      objectReference: {fileID: 0}
+    - target: {fileID: 4610134147907054417, guid: e0b2d924fc73d3c4ea080e1de158c508,
+        type: 3}
+      propertyPath: m_text
+      value: Hand Mirror
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0b2d924fc73d3c4ea080e1de158c508, type: 3}
 --- !u!1001 &6513902715067910242
@@ -6283,7 +6238,7 @@ PrefabInstance:
     - target: {fileID: 2465616068161872544, guid: 50f66b8627dc43e4997de85444113a0a,
         type: 3}
       propertyPath: m_Name
-      value: Mirror
+      value: Cudgel
       objectReference: {fileID: 0}
     - target: {fileID: 2465616068161872546, guid: 50f66b8627dc43e4997de85444113a0a,
         type: 3}
@@ -6293,7 +6248,7 @@ PrefabInstance:
     - target: {fileID: 2465616068161872546, guid: 50f66b8627dc43e4997de85444113a0a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnMirrorUsed
+      value: OnCudgelUsed
       objectReference: {fileID: 0}
     - target: {fileID: 2465616068161872547, guid: 50f66b8627dc43e4997de85444113a0a,
         type: 3}
@@ -6399,6 +6354,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2465616068161872557, guid: 50f66b8627dc43e4997de85444113a0a,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 6892274491808584661, guid: 8b7d8f8650ddc974f9edf11ec316c191,
+        type: 3}
+    - target: {fileID: 2465616068658373212, guid: 50f66b8627dc43e4997de85444113a0a,
+        type: 3}
+      propertyPath: m_text
+      value: Cudgel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50f66b8627dc43e4997de85444113a0a, type: 3}
