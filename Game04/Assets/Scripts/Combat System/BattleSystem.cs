@@ -43,7 +43,6 @@ public class BattleSystem : MonoBehaviour
         }
         inventoryInterface.GetComponent<Canvas>().enabled = false;
         choicesInterface.GetComponent<Canvas>().enabled = false;
-        EnemyAttackIndicatorController.Instance.enableIndicator(0);
         playerStats = player.GetComponent<Stats>();
         enemyStats = enemy.GetComponent<Stats>();
         playerHUD.SetHUD(playerStats);
@@ -60,6 +59,7 @@ public class BattleSystem : MonoBehaviour
         dialogueText.text = "Pop her ass.";
         yield return new WaitForSeconds(3f);
         PlayerTurn();
+        EnemyAttackIndicatorController.Instance.enableIndicator(0);
     }
 
     // Player Attack Method
@@ -72,9 +72,9 @@ public class BattleSystem : MonoBehaviour
         // Shake Effect upon taking damage (Very nice)
         for ( int i = 0; i < 10; i++)
         {
-            enemy.transform.position += new Vector3(5f, 0, 0);
+            enemy.transform.position += new Vector3(25f, 0, 0);
             yield return new WaitForSeconds(0.01f);
-            enemy.transform.position -= new Vector3(5f, 0, 0);
+            enemy.transform.position -= new Vector3(25f, 0, 0);
             yield return new WaitForSeconds(0.01f);
         }
 
@@ -181,9 +181,9 @@ public class BattleSystem : MonoBehaviour
         hitSound.Play();
         // Shaky Effect
         for ( int i = 0; i < 10; i++){
-            player.transform.position += new Vector3(5f, 0, 0);
+            player.transform.position += new Vector3(25f, 0, 0);
             yield return new WaitForSeconds(0.01f);
-            player.transform.position -= new Vector3(5f, 0, 0);
+            player.transform.position -= new Vector3(25f, 0, 0);
             yield return new WaitForSeconds(0.01f);
         }
         // Can use Write Method here-------
@@ -220,9 +220,9 @@ public class BattleSystem : MonoBehaviour
         hitSound.Play();
         // Shaky Effect
         for ( int i = 0; i < 10; i++){
-            player.transform.position += new Vector3(5f, 0, 0);
+            player.transform.position += new Vector3(25f, 0, 0);
             yield return new WaitForSeconds(0.01f);
-            player.transform.position -= new Vector3(5f, 0, 0);
+            player.transform.position -= new Vector3(25f, 0, 0);
             yield return new WaitForSeconds(0.01f);
         }
         // Can use Write Method here-------
@@ -277,9 +277,9 @@ public class BattleSystem : MonoBehaviour
         hitSound.Play();
         for ( int i = 0; i < 10; i++)
         {
-            enemy.transform.position += new Vector3(5f, 0, 0);
+            enemy.transform.position += new Vector3(25f, 0, 0);
             yield return new WaitForSeconds(0.01f);
-            enemy.transform.position -= new Vector3(5f, 0, 0);
+            enemy.transform.position -= new Vector3(25f, 0, 0);
             yield return new WaitForSeconds(0.01f);
         }
         dialogueInterface.GetComponent<Canvas>().enabled = true;
@@ -335,9 +335,9 @@ public class BattleSystem : MonoBehaviour
         // Shaky Effect!
         for ( int i = 0; i < 10; i++)
         {
-            enemy.transform.position += new Vector3(5f, 0, 0);
+            enemy.transform.position += new Vector3(25f, 0, 0);
             yield return new WaitForSeconds(0.01f);
-            enemy.transform.position -= new Vector3(5f, 0, 0);
+            enemy.transform.position -= new Vector3(25f, 0, 0);
             yield return new WaitForSeconds(0.01f);
         }
         dialogueInterface.GetComponent<Canvas>().enabled = true;
