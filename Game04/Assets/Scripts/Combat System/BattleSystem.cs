@@ -19,6 +19,7 @@ public class BattleSystem : MonoBehaviour
     public GameObject enemy;
     public BattleHUD playerHUD;
     public BattleHUD enemyHUD;
+    public float textSpeed = 1f;
     // Note: Might want to move Audio System to a different script
     public AudioSource textTransition;
     public AudioSource hitSound;
@@ -43,6 +44,7 @@ public class BattleSystem : MonoBehaviour
         }
         inventoryInterface.GetComponent<Canvas>().enabled = false;
         choicesInterface.GetComponent<Canvas>().enabled = false;
+        EnemyAttackIndicatorController.Instance.enableIndicator(0);
         playerStats = player.GetComponent<Stats>();
         enemyStats = enemy.GetComponent<Stats>();
         playerHUD.SetHUD(playerStats);
@@ -55,11 +57,10 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator StartIntro(){
         dialogueText.text = enemyStats.charName + " looked at you funny.";
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(3f * textSpeed);
         dialogueText.text = "Pop her ass.";
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(3f * textSpeed);
         PlayerTurn();
-        EnemyAttackIndicatorController.Instance.enableIndicator(0);
     }
 
     // Player Attack Method
@@ -72,14 +73,14 @@ public class BattleSystem : MonoBehaviour
         // Shake Effect upon taking damage (Very nice)
         for ( int i = 0; i < 10; i++)
         {
-            enemy.transform.position += new Vector3(25f, 0, 0);
+            enemy.transform.position += new Vector3(5f, 0, 0);
             yield return new WaitForSeconds(0.01f);
-            enemy.transform.position -= new Vector3(25f, 0, 0);
+            enemy.transform.position -= new Vector3(5f, 0, 0);
             yield return new WaitForSeconds(0.01f);
         }
 
         dialogueText.text = enemyStats.charName + " took " + playerStats.damage + " damage.";
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(3f * textSpeed);
         if(isDead){
             state = BattleState.WON;
             EndBattle();
@@ -167,7 +168,7 @@ public class BattleSystem : MonoBehaviour
     // Methods for Enemy Actions ===================================================================
     IEnumerator EnemyAttack0(){
         dialogueText.text = enemyStats.charName + " angrily attacks!";
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(3f * textSpeed);
         bool isDead = playerStats.TakeDamage((int)(enemyStats.damage*enemyAttackModifier));
         playerHUD.SetHP(playerStats);
 
@@ -181,14 +182,14 @@ public class BattleSystem : MonoBehaviour
         hitSound.Play();
         // Shaky Effect
         for ( int i = 0; i < 10; i++){
-            player.transform.position += new Vector3(25f, 0, 0);
+            player.transform.position += new Vector3(5f, 0, 0);
             yield return new WaitForSeconds(0.01f);
-            player.transform.position -= new Vector3(25f, 0, 0);
+            player.transform.position -= new Vector3(5f, 0, 0);
             yield return new WaitForSeconds(0.01f);
         }
         // Can use Write Method here-------
         dialogueText.text = " You took " + ((int)(enemyStats.damage*enemyAttackModifier)).ToString() + " damage.";
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(3f * textSpeed);
         enemyAttackModifier = 1;
         if(isDead){
             state = BattleState.LOST;
@@ -206,7 +207,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator EnemyAttack1(){
         dialogueText.text = enemyStats.charName + " recklessly attacks!";
         int enemyDamage= Random.Range(0, 16);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(3f * textSpeed);
         bool isDead = playerStats.TakeDamage((int)(enemyDamage*enemyAttackModifier));
         playerHUD.SetHP(playerStats);
 
@@ -220,14 +221,14 @@ public class BattleSystem : MonoBehaviour
         hitSound.Play();
         // Shaky Effect
         for ( int i = 0; i < 10; i++){
-            player.transform.position += new Vector3(25f, 0, 0);
+            player.transform.position += new Vector3(5f, 0, 0);
             yield return new WaitForSeconds(0.01f);
-            player.transform.position -= new Vector3(25f, 0, 0);
+            player.transform.position -= new Vector3(5f, 0, 0);
             yield return new WaitForSeconds(0.01f);
         }
         // Can use Write Method here-------
         dialogueText.text = " You took " + ((int)(enemyDamage*enemyAttackModifier)).ToString() + " damage.";
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(3f * textSpeed);
         enemyAttackModifier = 1;
         if(isDead){
             state = BattleState.LOST;
@@ -245,12 +246,12 @@ public class BattleSystem : MonoBehaviour
     // This one isn't used in the Tech Demo so ignore it :D
     IEnumerator EnemyAttack2(){
         dialogueText.text = enemyStats.charName + "Created a barrier";
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(3f * textSpeed);
         enemyStats.AddBarrier(10);
         enemyHUD.SetHP(enemyStats);
         // Can use Write Method here-------
         dialogueText.text = enemyStats.charName + " gained 10 barrier";
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(3f * textSpeed);
         
         state = BattleState.PLAYERTURN;
         int enemyAttackType = Random.Range(0, 2);
@@ -277,14 +278,14 @@ public class BattleSystem : MonoBehaviour
         hitSound.Play();
         for ( int i = 0; i < 10; i++)
         {
-            enemy.transform.position += new Vector3(25f, 0, 0);
+            enemy.transform.position += new Vector3(5f, 0, 0);
             yield return new WaitForSeconds(0.01f);
-            enemy.transform.position -= new Vector3(25f, 0, 0);
+            enemy.transform.position -= new Vector3(5f, 0, 0);
             yield return new WaitForSeconds(0.01f);
         }
         dialogueInterface.GetComponent<Canvas>().enabled = true;
         dialogueText.text = enemyStats.charName + " took " + 999999 + " damage.";
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(3f * textSpeed);
         if(isDead){
             state = BattleState.WON;
             EndBattle();
@@ -299,20 +300,20 @@ public class BattleSystem : MonoBehaviour
         playerStats.applyBuff(Buff.REFLECT, 2);
         dialogueInterface.GetComponent<Canvas>().enabled = true;
         dialogueText.text = "You used the Mirror's reflective magic...";
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(2.5f * textSpeed);
         dialogueText.text = enemyStats.charName + " Looked at the Mirror";
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(2.5f * textSpeed);
         dialogueText.text = "It seems to have reminded her of something";
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(2.5f * textSpeed);
         dialogueText.text = "She seems a bit...sad...";
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(3f * textSpeed);
         // I wanna reward the player for using this item by inflicting an additional debuff to Snow White called DEFENSELESS but we'll see to it later
         dialogueInterface.GetComponent<Canvas>().enabled = false;
         playerHUD.SetHP(playerStats);
 
         dialogueInterface.GetComponent<Canvas>().enabled = true;
         dialogueText.text = "You will partially <b>REFLECT</b> damage for two turns";
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(3f * textSpeed);
 
         state = BattleState.ENEMYTURN;
         EnemyTurn();
@@ -325,9 +326,9 @@ public class BattleSystem : MonoBehaviour
 
         dialogueInterface.GetComponent<Canvas>().enabled = true;
         dialogueText.text = "You lifted the cudgel and hit your opponent";
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(2.5f * textSpeed);
         dialogueText.text = "Your strength isn't amazing but it did some damage";
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(2.5f * textSpeed);
         dialogueInterface.GetComponent<Canvas>().enabled = false;
 
         enemyHUD.SetHP(enemyStats);
@@ -335,14 +336,14 @@ public class BattleSystem : MonoBehaviour
         // Shaky Effect!
         for ( int i = 0; i < 10; i++)
         {
-            enemy.transform.position += new Vector3(25f, 0, 0);
+            enemy.transform.position += new Vector3(5f, 0, 0);
             yield return new WaitForSeconds(0.01f);
-            enemy.transform.position -= new Vector3(25f, 0, 0);
+            enemy.transform.position -= new Vector3(5f, 0, 0);
             yield return new WaitForSeconds(0.01f);
         }
         dialogueInterface.GetComponent<Canvas>().enabled = true;
         dialogueText.text = enemyStats.charName + "Took 5 damage";
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(3f * textSpeed);
         if(isDead){
             state = BattleState.WON;
             EndBattle();
@@ -359,19 +360,19 @@ public class BattleSystem : MonoBehaviour
         if (playerStats.currentHP == playerStats.maxHP){
             dialogueInterface.GetComponent<Canvas>().enabled = true;
             dialogueText.text = "You used the Magic Cloth";
-            yield return new WaitForSeconds(2.5f);
+            yield return new WaitForSeconds(2.5f * textSpeed);
             dialogueText.text = "With no wounds to heal, it had no effect";
-            yield return new WaitForSeconds(2.5f);
+            yield return new WaitForSeconds(2.5f * textSpeed);
         } else {
             playerStats.Heal(6);
             dialogueInterface.GetComponent<Canvas>().enabled = true;
             dialogueText.text = "You used the Magic Cloth";
-            yield return new WaitForSeconds(2.5f);
+            yield return new WaitForSeconds(2.5f * textSpeed);
             dialogueText.text = "Its warmth eased your pain";
-            yield return new WaitForSeconds(2.5f);
+            yield return new WaitForSeconds(2.5f * textSpeed);
             playerHUD.SetHP(playerStats);
             dialogueText.text = "You healed 6 Hp";
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(3f * textSpeed);
         }
     
         state = BattleState.ENEMYTURN;
@@ -384,18 +385,18 @@ public class BattleSystem : MonoBehaviour
         playerStats.AddBarrier(10);
         dialogueInterface.GetComponent<Canvas>().enabled = true;
         dialogueText.text = "The Silver Hands of the pure maiden";
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(2.5f * textSpeed);
         dialogueText.text = "Unfortunately, they're too heavy for you to bear";
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(2.5f * textSpeed);
         dialogueText.text = "But they offer protection against pain to come";
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(2.5f * textSpeed);
         dialogueInterface.GetComponent<Canvas>().enabled = false;
 
         playerHUD.SetHP(playerStats);
         hitSound.Play();
         dialogueInterface.GetComponent<Canvas>().enabled = true;
         dialogueText.text = "You gained 10 Barrier";
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(3f * textSpeed);
 
         state = BattleState.ENEMYTURN;
         EnemyTurn();
@@ -406,16 +407,16 @@ public class BattleSystem : MonoBehaviour
         enemyStats.applyDebuff(Debuff.BIND, 3);
         dialogueInterface.GetComponent<Canvas>().enabled = true;
         dialogueText.text = "The Magic Hair binds your opponent";
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(2.5f * textSpeed);
         dialogueText.text = "With movement restricted, her attacks are weakened";
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(2.5f * textSpeed);
         dialogueInterface.GetComponent<Canvas>().enabled = false;
 
         enemyHUD.SetHP(enemyStats);
         hitSound.Play();
         dialogueInterface.GetComponent<Canvas>().enabled = true;
         dialogueText.text = enemyStats.charName + " <b>Bound</b> for 3 turns";
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(3f * textSpeed);
 
         state = BattleState.ENEMYTURN;
         EnemyTurn();
