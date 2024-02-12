@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyAttackIndicatorController : MonoBehaviour
 {
     private static EnemyAttackIndicatorController _instance;
     public static EnemyAttackIndicatorController Instance { get { return _instance; } }
 
-    public List<SpriteRenderer> attackIndicators;
+    public List<Image> attackIndicators;
 
     private int indicatorEnabled;
 
@@ -16,19 +17,23 @@ public class EnemyAttackIndicatorController : MonoBehaviour
         disableAllIndicators();
     }
 
+    private void setIndicatorComponent(Image indicatorComponent, bool value){
+        indicatorComponent.enabled = value;
+    }
+
     public void disableAllIndicators(){
         for(int i=0;i<attackIndicators.Count;i++){
-            attackIndicators[i].enabled = false;
+            setIndicatorComponent(attackIndicators[i], false);
         }
     }
 
     public void enableIndicator(int index){
-        attackIndicators[index].enabled = true;
+        setIndicatorComponent(attackIndicators[index], true);
         indicatorEnabled = index;
     }
 
     public void disableIndicator(int index){
-        attackIndicators[index].enabled = false;
+        setIndicatorComponent(attackIndicators[index], false);
     }
 
     public int getEnabledIndicator(){

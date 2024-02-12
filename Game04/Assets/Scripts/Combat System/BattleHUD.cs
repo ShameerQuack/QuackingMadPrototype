@@ -24,10 +24,10 @@ public class BattleHUD : MonoBehaviour
             barrierText = unit.barrier.ToString();
         }
         if (reverseText){
-            hpText.text =  "<color=#6BF2F6>" + barrierText + "</color> <size=0.06>" + unit.currentHP + "</size>/" + unit.maxHP;
+            hpText.text =  "<color=#6BF2F6>" + barrierText + "</color> " + unit.currentHP + "/" + unit.maxHP;
         } 
         else {
-            hpText.text =  "<size=0.06>" + unit.currentHP + "</size>/" + unit.maxHP + "<color=#6BF2F6> " + barrierText + "</color>";
+            hpText.text =  unit.currentHP + "/" + unit.maxHP + "<color=#6BF2F6> " + barrierText + "</color>";
         }
     }
 }
