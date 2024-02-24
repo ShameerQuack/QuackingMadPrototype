@@ -5,7 +5,7 @@ namespace Narrative
 {
     public class DialogueOnStart : MonoBehaviour
     {
-
+        public bool fight = false;
         /// <summary> The csv file containing the dialogue to be played. </summary>
         [SerializeField] private TextAsset dialogueCSV;
 
@@ -35,13 +35,20 @@ namespace Narrative
         /// </summary>
         private void OnDialogueEnd()
         {
-            if (writeToFlagId != "")
+            if (!fight)
             {
-                DialogueFlags.SetFlag(writeToFlagId, writeToFlagValue);
+                if (writeToFlagId != "")
+                {
+                    DialogueFlags.SetFlag(writeToFlagId, writeToFlagValue);
+                }
+                DialogueSystem.OnDialogueEnd.RemoveListener(OnDialogueEnd);//We shouldn't recieve this if we aren't playing something.
+                goddamn_raccoon.Trigger();
+                Destroy(this);
             }
-            DialogueSystem.OnDialogueEnd.RemoveListener(OnDialogueEnd);//We shouldn't recieve this if we aren't playing something.
-            goddamn_raccoon.Trigger();
-            Destroy(this);
+            else
+			{
+                Destroy(this);
+            }
         }
     }
 }

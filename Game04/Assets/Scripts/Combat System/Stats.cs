@@ -34,6 +34,7 @@ public class Stats: MonoBehaviour
         currentHP -= dmgTaken;
         if (currentHP <= 0){
             currentHP = 0;
+            gameObject.GetComponent<Animator>().enabled = false;
             gameObject.GetComponent<SpriteRenderer>().sprite = ohNoFellDown;
             return true;
         }
