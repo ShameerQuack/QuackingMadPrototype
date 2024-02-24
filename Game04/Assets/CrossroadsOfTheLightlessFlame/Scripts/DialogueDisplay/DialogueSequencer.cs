@@ -38,6 +38,7 @@ namespace Narrative
         private int currentLine = 0;  //current line in the sequence we are playing
         private bool isPlaying = false;
 
+        public GameObject skipButton;
 
         /// <summary>
         /// Starts playing the given sequence
@@ -68,6 +69,7 @@ namespace Narrative
         /// </summary>
         public void onSequenceAdvanced()
         {
+            gameObject.GetComponent<AudioSource>().Play();
             bool hasNext = currentDialog.HasLine(currentLine + 1);
             if (hasNext)
             {
@@ -81,6 +83,13 @@ namespace Narrative
                 textbox.CloseTextbox();
                 onFinish.Invoke();
             }
+        }
+
+        public void Skip()
+		{
+            textbox.CloseTextbox();
+            onFinish.Invoke();
+            skipButton.SetActive(false);
         }
 
         /// <summary>
