@@ -698,7 +698,7 @@ public class BattleSystem : MonoBehaviour
     }
 
     // New Items=================================================
-    public void OnIronShoesButton(){
+    public void OnIronShoesUsed(){
         closeAllInterface();
         if(state != BattleState.PLAYERTURN){
             return;
@@ -708,7 +708,7 @@ public class BattleSystem : MonoBehaviour
 
     }
 
-    public void OnHatButton(){
+    public void OnHatUsed(){
         closeAllInterface();
         if(state != BattleState.PLAYERTURN){
             return;
@@ -718,7 +718,7 @@ public class BattleSystem : MonoBehaviour
 
     }
 
-    public void OnCrystalBallButton(){
+    public void OnCrystalBallUsed(){
         closeAllInterface();
         if(state != BattleState.PLAYERTURN){
             return;
@@ -728,7 +728,7 @@ public class BattleSystem : MonoBehaviour
 
     }
 
-    public void OnAppleButton(){
+    public void OnAppleUsed(){
         closeAllInterface();
         if(state != BattleState.PLAYERTURN){
             return;
@@ -738,7 +738,7 @@ public class BattleSystem : MonoBehaviour
 
     }
 
-    public void OnVenomButton(){
+    public void OnVenomUsed(){
         closeAllInterface();
         if(state != BattleState.PLAYERTURN){
             return;
@@ -748,7 +748,7 @@ public class BattleSystem : MonoBehaviour
 
     }
 
-    public void OnSackOfKnowledgeButton(){
+    public void OnSackOfKnowledgeUsed(){
         closeAllInterface();
         if(state != BattleState.PLAYERTURN){
             return;

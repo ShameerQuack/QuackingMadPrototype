@@ -2496,7 +2496,7 @@ PrefabInstance:
     - target: {fileID: 2465616068161872546, guid: 50f66b8627dc43e4997de85444113a0a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnCudgelUsed
+      value: OnVenomUsed
       objectReference: {fileID: 0}
     - target: {fileID: 2465616068161872547, guid: 50f66b8627dc43e4997de85444113a0a,
         type: 3}
@@ -6368,7 +6368,7 @@ PrefabInstance:
     - target: {fileID: 2465616068161872546, guid: 50f66b8627dc43e4997de85444113a0a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnCudgelUsed
+      value: OnIronShoesUsed
       objectReference: {fileID: 0}
     - target: {fileID: 2465616068161872547, guid: 50f66b8627dc43e4997de85444113a0a,
         type: 3}
@@ -7895,7 +7895,7 @@ PrefabInstance:
     - target: {fileID: 2465616068161872546, guid: 50f66b8627dc43e4997de85444113a0a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnCudgelUsed
+      value: OnAppleUsed
       objectReference: {fileID: 0}
     - target: {fileID: 2465616068161872547, guid: 50f66b8627dc43e4997de85444113a0a,
         type: 3}
@@ -8556,7 +8556,7 @@ PrefabInstance:
     - target: {fileID: 2465616068161872546, guid: 50f66b8627dc43e4997de85444113a0a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnCudgelUsed
+      value: OnCrystalBallUsed
       objectReference: {fileID: 0}
     - target: {fileID: 2465616068161872547, guid: 50f66b8627dc43e4997de85444113a0a,
         type: 3}
@@ -11123,7 +11123,7 @@ PrefabInstance:
     - target: {fileID: 2465616068161872546, guid: 50f66b8627dc43e4997de85444113a0a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnCudgelUsed
+      value: OnSackOfKnowledgeUsed
       objectReference: {fileID: 0}
     - target: {fileID: 2465616068161872547, guid: 50f66b8627dc43e4997de85444113a0a,
         type: 3}
@@ -12074,7 +12074,7 @@ PrefabInstance:
     - target: {fileID: 2465616068161872546, guid: 50f66b8627dc43e4997de85444113a0a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnCudgelUsed
+      value: OnHatUsed
       objectReference: {fileID: 0}
     - target: {fileID: 2465616068161872547, guid: 50f66b8627dc43e4997de85444113a0a,
         type: 3}
