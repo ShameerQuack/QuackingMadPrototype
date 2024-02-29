@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Buff{ NONE, REFLECT }
+public enum Buff{ NONE, REFLECT, DMGBOOST, VAMPIRISM }
 public enum Debuff{ NONE, BIND }
 public class Stats: MonoBehaviour
 {
