@@ -6,7 +6,6 @@ using UnityEngine.Events;
 namespace Narrative
 {
 
-
     /// <summary>
     /// An inline struct to contain dialogue activation conditions
     /// </summary>

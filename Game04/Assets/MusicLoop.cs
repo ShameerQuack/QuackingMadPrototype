@@ -9,7 +9,11 @@ public class MusicLoop : MonoBehaviour
 
     private AudioSource music;
     public AudioSource music2;
+    public AudioSource[] startTheseToo;
     public float fade;
+    public bool crossFade = false;
+    public bool alreadyPlaying = false;
+    public bool dontStop = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,19 +34,40 @@ public class MusicLoop : MonoBehaviour
         StartCoroutine(CrossFade(music2, fade));
 	}
 
+    public void VariableTransition(AudioSource secondSong, float fadeTime)
+    {
+        StartCoroutine(CrossFade(secondSong, fadeTime));
+    }
+
     public IEnumerator CrossFade(AudioSource audioSource, float fadeTime)
     {
-        audioSource.Play();
+        if (crossFade)
+		{
+            audioSource.volume = 0;
+		}
+        if (!alreadyPlaying)
+        {
+            audioSource.Play();
+            foreach (AudioSource these in startTheseToo)
+			{
+                these.Play();
+			}
+        }
         float startingVolume = music.volume;
-
-        yield return new WaitForSeconds(fadeTime);
+        
+        //yield return new WaitForSeconds(fadeTime);
         while (music.volume > 0)
         {
             music.volume -= startingVolume * Time.deltaTime / fadeTime;
+            if (crossFade)
+			{
+                audioSource.volume += 1 * Time.deltaTime / fadeTime;
+            }
 
             yield return null;
         }
 
-        music.Stop();
+        if (!dontStop)
+            music.Stop();
     }
 }
