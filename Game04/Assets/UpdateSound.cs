@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UpdateSound : MonoBehaviour
 {
     public bool music = false;
+    public float multiplyer = 1.0f;
     private string volumeType = "SoundVolume";
 
     // Start is called before the first frame update
@@ -21,6 +22,6 @@ public class UpdateSound : MonoBehaviour
 
     public void JustForPlayButton()
 	{
-        gameObject.GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat(volumeType, 1) * 0.5f;
+        gameObject.GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat(volumeType, 1) * multiplyer;
     }
 }

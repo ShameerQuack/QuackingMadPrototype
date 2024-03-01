@@ -32,6 +32,11 @@ namespace Narrative
         public bool IsOpen { get { return isOpen; } }
         public bool IsActive { get { return isActive; } }
 
+        public AudioSource talkSound;
+        public MusicLoop transitionMusic;
+        public int enemyIntroChangePoint = 0;
+        public int enemyIntroCheck = 0;
+
         // Start is called before the first frame update
         private void Start()
         {
@@ -56,7 +61,7 @@ namespace Narrative
         private void CheckInput()
         {
             //Input for advancing textbox
-            if (Input.GetMouseButtonDown(0))
+            if (Input.anyKey)
             {
                 if (isEndOfText())
                 {
@@ -78,6 +83,7 @@ namespace Narrative
 
                 if (isEndOfText())
                 {
+                    talkSound.Stop();
                     advanceArrow.SetVisible(true);
                 }
             }
@@ -88,6 +94,7 @@ namespace Narrative
         /// </summary>
         public void OpenTextbox()
         {
+            talkSound.Play();
             animator.SetBool("isOpen", true);
             advanceArrow.SetVisible(false);
             nameLabel.text = "";
@@ -100,6 +107,7 @@ namespace Narrative
         public void CloseTextbox()
         {
             animator.SetBool("isOpen", false);
+            talkSound.Stop();
         }
 
         /// <summary>
@@ -147,6 +155,16 @@ namespace Narrative
         /// </summary>
         public void AdvanceLine()
         {
+            if (enemyIntroChangePoint > 0)
+			{
+                enemyIntroCheck += 1;
+                if (enemyIntroCheck >= enemyIntroChangePoint)
+				{
+                    enemyIntroChangePoint = -1;
+                    transitionMusic.Transition();
+				}
+			}
+            talkSound.Play();
             advanceArrow.SetVisible(false);
             onAdvance.Invoke();
         }

@@ -33,6 +33,15 @@ public class BattleSystem : MonoBehaviour
     public GameObject winCanvas;
     public GameObject skip;
 
+    // Boss Music Transitions
+    public int MCstate = 0;
+    public AudioSource MC100;
+    public MusicLoop MC100Switch;
+    public AudioSource MC50;
+    public MusicLoop MC50Switch;
+    public AudioSource MC25;
+    public MusicLoop MC25Switch;
+
     Stats playerStats;
     Stats enemyStats;
     private float enemyAttackModifier = 1.0f;
@@ -82,6 +91,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator PlayerAttack()
     {
         bool isDead = enemyStats.TakeDamage(playerStats.damage);
+        transitionMusic();
 
         enemyHUD.SetHP(enemyStats);
         hitSound.Play();
@@ -203,16 +213,53 @@ public class BattleSystem : MonoBehaviour
         inventoryInterface.GetComponent<Canvas>().enabled = false;
     }
 
+    // Method for Music Transitions
+    void transitionMusic()
+	{
+        if ((playerStats.currentHP <= (playerStats.maxHP * 0.25f)) && MCstate == 0)
+        {
+            MCstate = 2;
+            MC100Switch.VariableTransition(MC25, 0.3333f);
+        }
+        else if ((playerStats.currentHP <= (playerStats.maxHP * 0.5f)) && MCstate == 0)
+		{
+            MCstate = 1;
+            MC100Switch.VariableTransition(MC50, 0.3333f);
+		}
+        else if ((playerStats.currentHP > (playerStats.maxHP * 0.5f)) && MCstate == 1)
+        {
+            MCstate = 0;
+            MC50Switch.VariableTransition(MC100, 0.3333f);
+        }
+        else if ((playerStats.currentHP <= (playerStats.maxHP * 0.25f)) && MCstate == 1)
+        {
+            MCstate = 2;
+            MC50Switch.VariableTransition(MC25, 0.3333f);
+        }
+        else if ((playerStats.currentHP > (playerStats.maxHP * 0.5f)) && MCstate == 2)
+        {
+            MCstate = 0;
+            MC25Switch.VariableTransition(MC100, 0.3333f);
+        }
+        else if ((playerStats.currentHP > (playerStats.maxHP * 0.25f)) && MCstate == 2)
+        {
+            MCstate = 1;
+            MC25Switch.VariableTransition(MC50, 0.3333f);
+        }
+    }
+
     // Methods for Enemy Actions ===================================================================
     IEnumerator EnemyAttack0(){
         dialogueText.text = enemyStats.charName + " attacked with focused anger!";
         yield return new WaitForSeconds(3f * textSpeed);
         bool isDead = playerStats.TakeDamage((int)(enemyStats.damage*enemyAttackModifier));
+        transitionMusic();
         playerHUD.SetHP(playerStats);
 
         if (playerStats.buffState==Buff.REFLECT){
             if(enemyStats.TakeDamage((int)(enemyStats.damage*enemyAttackModifier*0.5))){
                 enemyStats.currentHP = 1;
+                transitionMusic();
             }
             enemyHUD.SetHP(enemyStats);
         }
@@ -249,11 +296,13 @@ public class BattleSystem : MonoBehaviour
         int enemyDamage= Random.Range(0, 13);
         yield return new WaitForSeconds(3f * textSpeed);
         bool isDead = playerStats.TakeDamage((int)(enemyDamage*enemyAttackModifier));
+        transitionMusic();
         playerHUD.SetHP(playerStats);
 
         if (playerStats.buffState==Buff.REFLECT){
             if(enemyStats.TakeDamage((int)(enemyDamage*enemyAttackModifier*0.5))){
                 enemyStats.currentHP = 1;
+                transitionMusic();
             }
             enemyHUD.SetHP(enemyStats);
         }
@@ -316,6 +365,7 @@ public class BattleSystem : MonoBehaviour
         backgroundMusic.Play();
 
         bool isDead = enemyStats.TakeDamage(9999999);
+        transitionMusic();
 
         enemyHUD.SetHP(enemyStats);
         hitSound.Play();
@@ -368,6 +418,7 @@ public class BattleSystem : MonoBehaviour
     // Method for Cudgel Item - Needs Audio (my bad)
     IEnumerator UseCudgel(){
         bool isDead = enemyStats.TakeDamage((int)(5*playerAttackModifier));
+        transitionMusic();
 
         dialogueInterface.GetComponent<Canvas>().enabled = true;
         dialogueText.text = "You lifted the cudgel and hit your opponent.";
@@ -414,6 +465,7 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitForSeconds(2.5f * textSpeed);
         } else {
             playerStats.Heal(8);
+            transitionMusic();
             dialogueInterface.GetComponent<Canvas>().enabled = true;
             dialogueText.text = "You used the Magic Cloth.";
             yield return new WaitForSeconds(2.5f * textSpeed);
@@ -505,6 +557,7 @@ public class BattleSystem : MonoBehaviour
         bool isDead = false;
         for (int i = 0; i < randInt; i++){
             isDead = enemyStats.TakeDamage((int)(2*playerAttackModifier));
+            transitionMusic();
         }
         dialogueInterface.GetComponent<Canvas>().enabled = true;
         dialogueText.text = "The hat fires " + randInt.ToString() + " bullets.";
@@ -592,6 +645,7 @@ public class BattleSystem : MonoBehaviour
     // Method for White Snake Venom Item
     IEnumerator UseVenom(){
         bool isDead = playerStats.TakeDamage(3);
+        transitionMusic();
         playerHUD.SetHP(playerStats);
         // Shaky Effect
         for ( int i = 0; i < 10; i++){
