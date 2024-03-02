@@ -49,8 +49,33 @@ public class BattleSystem : MonoBehaviour
     private float enemyHpMod = 1.0f;
     private float playerHpMod = 1.0f;
 
+    // Item First Use Trackers
+    private bool CudgelFirstUse;
+    private bool MirrorFirstUse;
+    private bool ClothFirstUse;
+    private bool CrystalBallFirstUse;
+    private bool HatFirstUse;
+    private bool VenomFirstUse;
+    private bool SilvHandsFirstUse;
+    private bool HairFirstUse;
+    private bool IronShoesFirstUse;
+    private bool AppleFirstUse;
+    private bool WisdomFirstUse;
+    
+
     void Start(){
         state = BattleState.START;
+        CudgelFirstUse = true;
+        MirrorFirstUse = true;
+        ClothFirstUse = true;
+        CrystalBallFirstUse = true;
+        HatFirstUse = true;
+        VenomFirstUse = true;
+        SilvHandsFirstUse = true;
+        HairFirstUse = true;
+        IronShoesFirstUse = true;
+        AppleFirstUse = true;
+        WisdomFirstUse = true;
         preIntro();
     }
 
@@ -268,7 +293,7 @@ public class BattleSystem : MonoBehaviour
 
     // Methods for Enemy Actions ===================================================================
     IEnumerator EnemyAttack0(){
-        dialogueText.text = enemyStats.charName + " attacked with focused anger!";
+        dialogueText.text = enemyStats.charName + " casts \"Spell of the Fluttering Heart\".";
         yield return new WaitForSeconds(3f * textSpeed);
         bool isDead = playerStats.TakeDamage((int)(enemyStats.damage*enemyAttackModifier*enemyHpMod));
         transitionMusic();
@@ -310,7 +335,7 @@ public class BattleSystem : MonoBehaviour
     }
 
     IEnumerator EnemyAttack1(){
-        dialogueText.text = enemyStats.charName + " attacked recklessly!";
+        dialogueText.text = enemyStats.charName + " Snow White casts \"Wings of Unconditional Love\"";
         int enemyDamage= Random.Range(0, 13);
         yield return new WaitForSeconds(3f * textSpeed);
         bool isDead = playerStats.TakeDamage((int)(enemyDamage*enemyAttackModifier*enemyHpMod));
@@ -354,7 +379,7 @@ public class BattleSystem : MonoBehaviour
 
     // This one isn't used in the Tech Demo so ignore it :D
     IEnumerator EnemyAttack2(){
-        dialogueText.text = enemyStats.charName + " created a barrier.";
+        dialogueText.text = enemyStats.charName + " casts \"Paws of Passionate Protection.\"";
         yield return new WaitForSeconds(3f * textSpeed);
         int barrier = (int)(Random.Range(4, 7) * enemyHpMod);
         enemyStats.AddBarrier(barrier);
@@ -555,9 +580,9 @@ public class BattleSystem : MonoBehaviour
             // Need to get code for activating debuff intigators
             playerStats.applyDebuff(Debuff.NONE, 0);
             dialogueInterface.GetComponent<Canvas>().enabled = true;
-            dialogueText.text = "Envy pours from the shoes...";
+            dialogueText.text = "As you slip on the shoes, a wave of envy engulfs you.";
             yield return new WaitForSeconds(2.5f * textSpeed);
-            dialogueText.text = "Your ailment is cast upon your opponent.";
+            dialogueText.text = "You want the peace they have, and the shoes seem somehow able to grant this desire.";
             yield return new WaitForSeconds(2.5f * textSpeed);
             dialogueText.text = enemyStats.charName + "'s debuff duration is increased to " + enemyStats.debuffDuration.ToString();
             yield return new WaitForSeconds(2.5f * textSpeed);
