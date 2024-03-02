@@ -39,15 +39,7 @@ namespace Narrative
         public void Trigger()
         {
 
-            blueBookmark.SetActive(true);
-            redBookmark.SetActive(true);
-            choiceBox.SetActive(true);
-            rp1.SetActive(true);
-            rp2.SetActive(true);
-            rp3.SetActive(true);
-            bp1.SetActive(true);
-            bp2.SetActive(true);
-            bp3.SetActive(true);
+            GameMaster.Instance.BookMarkSelectionManager.startSelection();
 
         }
 
