@@ -30,6 +30,8 @@ namespace Narrative
         public GameObject rp1, rp2, rp3, bp1, bp2, bp3;
         public GameObject d1, d2, d3, d4, d5;
 
+        public MusicLoop thaMusic;
+
         //Plays at the Start
         void Start(){
         }
@@ -77,6 +79,7 @@ namespace Narrative
         {
             DialogueFlags.SetFlag(postChoiceConditionEffects[_choice].flagID, postChoiceConditionEffects[_choice].expectedValue);
             DialogueSystem.OnDialogueEnd.RemoveListener(OnDialogueEnd);//We shouldn't recieve this if we aren't playing something.
+            thaMusic.Transition();
             SceneChanger.Instance.FadeToNextScene();
         }
 

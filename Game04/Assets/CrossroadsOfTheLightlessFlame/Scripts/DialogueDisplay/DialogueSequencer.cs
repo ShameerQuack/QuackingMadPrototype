@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
 namespace Narrative
 {
@@ -30,6 +31,8 @@ namespace Narrative
 
         //Sub-Object references
         [SerializeField] private DialogueBox textbox;
+        [SerializeField] private TextMeshProUGUI originalTextLabel;
+        [SerializeField] private TextMeshProUGUI otherTextLabel;
         [SerializeField] private DialogueChoices choices;
 
         //Object properties
@@ -38,6 +41,11 @@ namespace Narrative
         private bool isPlaying = false;
 
         public GameObject skipButton;
+        public GameObject skipButton2;
+        public GameObject speaker1;
+        public GameObject speaker2;
+        public string speaker1Name = "";
+        public string speaker2Name = "";
 
         /// <summary>
         /// Starts playing the given sequence
@@ -89,6 +97,7 @@ namespace Narrative
             textbox.CloseTextbox();
             onFinish.Invoke();
             skipButton.SetActive(false);
+            skipButton2.SetActive(false);
         }
 
         /// <summary>
@@ -97,15 +106,31 @@ namespace Narrative
         /// <param name="lineNum">Line number</param>
         private void ParseLine(int lineNum)
         {
-            //Apply to textbox
-            textbox.SetLine(currentDialog.GetRowDialogue(lineNum));
             //Apply to textbox speaker name
             string name = currentDialog.GetRowName(lineNum);
+            if (name == speaker1Name)
+            {
+                print("eee");
+                speaker2.SetActive(false);
+                speaker1.SetActive(true);
+                textbox.ChangeText(originalTextLabel);
+            }
+            else if (name == speaker2Name)
+            {
+                print("e");
+                speaker1.SetActive(false);
+                speaker2.SetActive(true);
+                textbox.ChangeText(otherTextLabel);
+            }
+            //Apply to textbox
+            textbox.SetLine(currentDialog.GetRowDialogue(lineNum));
             if (name != "")//Only apply if not empty
             {
+                print(name);
+                
                 textbox.SetName(name);
             }
-
+            
             
         }
 

@@ -10,14 +10,24 @@ public class MusicLoop : MonoBehaviour
     private AudioSource music;
     public AudioSource music2;
     public AudioSource[] startTheseToo;
+    public MusicLoop[] fadeTheseToo;
     public float fade;
     public bool crossFade = false;
     public bool alreadyPlaying = false;
     public bool dontStop = false;
+    public bool immediateFade = false;
     // Start is called before the first frame update
     void Start()
     {
+        if (music2 == null)
+		{
+            music2 = music;
+		}
         music = gameObject.GetComponent<AudioSource>();
+        if (immediateFade)
+		{
+            Transition();
+		}
     }
 
     // Update is called once per frame
@@ -54,7 +64,11 @@ public class MusicLoop : MonoBehaviour
 			}
         }
         float startingVolume = music.volume;
-        
+        foreach (MusicLoop these in fadeTheseToo)
+        {
+            these.Transition();
+        }
+
         //yield return new WaitForSeconds(fadeTime);
         while (music.volume > 0)
         {
