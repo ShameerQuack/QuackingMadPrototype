@@ -20,6 +20,7 @@ namespace Narrative
         //Singleton pattern
         private static DialogueSystem _instance;
         public static DialogueSystem Instance { get { return _instance; } }
+        public float waitForTime = -1.0f;
 
 
         [SerializeField] private DialogueSequencer dialogueSequencer;//reference to the sequencer
@@ -33,6 +34,19 @@ namespace Narrative
         // Start is called before the first frame update
         void Start()
         {
+            if (waitForTime <= 0)
+            {
+                //Add event listeners
+                dialogueSequencer.onFinish.AddListener(OnFinish);
+                dialogueCanvas.enabled = true;//Enable the canvas only on runtime so it doesn't get in the way of scene editing
+            }
+            else
+                StartCoroutine(WaitABit());
+        }
+
+        IEnumerator WaitABit()
+		{
+            yield return new WaitForSeconds(waitForTime);
             //Add event listeners
             dialogueSequencer.onFinish.AddListener(OnFinish);
             dialogueCanvas.enabled = true;//Enable the canvas only on runtime so it doesn't get in the way of scene editing

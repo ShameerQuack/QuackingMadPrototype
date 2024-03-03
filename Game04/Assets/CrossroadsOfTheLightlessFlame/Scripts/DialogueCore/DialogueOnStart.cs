@@ -14,6 +14,7 @@ namespace Narrative
         [SerializeField]
         private string writeToFlagId = "";
         [SerializeField] private bool writeToFlagValue = false;
+        private float waitForTime = -1.0f;
 
         [Header("Conditions")]
         [SerializeField] private List<Condition> conditions = new List<Condition>();
@@ -23,7 +24,24 @@ namespace Narrative
         // Start is called before the first frame update
         void Start()
         {
-            if (dialogueCSV!=null){//If we have a dialogue
+            waitForTime = DialogueSystem.Instance.waitForTime;
+            if (waitForTime <= 0)
+            {
+                if (dialogueCSV != null)
+                {//If we have a dialogue
+                    DialogueSystem.OnDialogueEnd.AddListener(OnDialogueEnd);
+                    DialogueSystem.PlaySequence(dialogueCSV);
+                }
+            }
+            else
+                StartCoroutine(WaitABit());
+        }
+
+        IEnumerator WaitABit()
+        {
+            yield return new WaitForSeconds(waitForTime);
+            if (dialogueCSV != null)
+            {//If we have a dialogue
                 DialogueSystem.OnDialogueEnd.AddListener(OnDialogueEnd);
                 DialogueSystem.PlaySequence(dialogueCSV);
             }

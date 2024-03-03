@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace Narrative
 {
@@ -18,6 +19,7 @@ namespace Narrative
         [SerializeField] private TextMeshProUGUI textLabel;
         [SerializeField] private TextMeshProUGUI nameLabel;
         [SerializeField] private AdvanceArrow advanceArrow;
+        [SerializeField] private AdvanceArrow advanceArrow2;
         [SerializeField] private Animator animator;
 
         //Object properties
@@ -31,17 +33,37 @@ namespace Narrative
         [SerializeField] [HideInInspector] private bool isActive = false;
         public bool IsOpen { get { return isOpen; } }
         public bool IsActive { get { return isActive; } }
+        private float waitForTime = -1.0f;
 
         public AudioSource talkSound;
         public MusicLoop transitionMusic;
         public int enemyIntroChangePoint = 0;
         public int enemyIntroCheck = 0;
+        public AudioSource hmph;
+        public Image angryFace;
+        public Sprite visualAnger;
+        public Animator fullBody;
 
         // Start is called before the first frame update
         private void Start()
         {
+            waitForTime = DialogueSystem.Instance.waitForTime;
+            if (waitForTime <= 0)
+            {
+                //Connect onAdvance event to hide the advancearrow object on invoke
+                onAdvance.AddListener(() => advanceArrow.SetVisible(false));
+                onAdvance.AddListener(() => advanceArrow2.SetVisible(false));
+            }
+            else
+                StartCoroutine(WaitABit());
+        }
+
+        IEnumerator WaitABit()
+        {
+            yield return new WaitForSeconds(waitForTime);
             //Connect onAdvance event to hide the advancearrow object on invoke
             onAdvance.AddListener(() => advanceArrow.SetVisible(false));
+            onAdvance.AddListener(() => advanceArrow2.SetVisible(false));
         }
 
         // Update is called once per frame
@@ -85,6 +107,7 @@ namespace Narrative
                 {
                     talkSound.Stop();
                     advanceArrow.SetVisible(true);
+                    advanceArrow2.SetVisible(true);
                 }
             }
         }
@@ -97,9 +120,15 @@ namespace Narrative
             talkSound.Play();
             animator.SetBool("isOpen", true);
             advanceArrow.SetVisible(false);
+            advanceArrow2.SetVisible(false);
             nameLabel.text = "";
             isActive = true;
         }
+
+        public void ChangeText(TextMeshProUGUI newText)
+		{
+            textLabel = newText;
+		}
 
         /// <summary>
         /// Closes the textbox by playing the close animation
@@ -162,10 +191,14 @@ namespace Narrative
 				{
                     enemyIntroChangePoint = -1;
                     transitionMusic.Transition();
+                    angryFace.sprite = visualAnger;
+                    fullBody.SetTrigger("Get Mad");
+                    hmph.Play();
 				}
 			}
             talkSound.Play();
             advanceArrow.SetVisible(false);
+            advanceArrow2.SetVisible(false);
             onAdvance.Invoke();
         }
     }

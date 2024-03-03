@@ -61,6 +61,11 @@ public class BattleSystem : MonoBehaviour
     private bool IronShoesFirstUse;
     private bool AppleFirstUse;
     private bool WisdomFirstUse;
+
+    private Animator playerAnim;
+    private Animator enemyAnim;
+
+    public GameObject musicIntro;
     
 
     void Start(){
@@ -76,6 +81,8 @@ public class BattleSystem : MonoBehaviour
         IronShoesFirstUse = true;
         AppleFirstUse = true;
         WisdomFirstUse = true;
+        playerAnim = player.GetComponent<Animator>();
+        enemyAnim = enemy.GetComponent<Animator>();
         preIntro();
     }
 
@@ -107,12 +114,29 @@ public class BattleSystem : MonoBehaviour
     IEnumerator StartIntro(){
         skip.SetActive(false);
         dialogueText.text = enemyStats.charName + " looked at you funny.";
-        yield return new WaitForSeconds(3f * textSpeed);
+        yield return new WaitForSeconds(5.3333f);  // the 5.3333f value is her for music syncing. Do not change it please!!!!!
         dialogueText.text = "Don't back down.";
-        yield return new WaitForSeconds(3f * textSpeed);
+        yield return new WaitForSeconds(5.3333f);
+
+        musicIntro.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "My Favourite Kind of Death";
+        musicIntro.GetComponent<Animator>().StartPlayback();
+        playerHUD.gameObject.SetActive(true);
+        enemyHUD.gameObject.SetActive(true);
         player.GetComponent<Animator>().SetTrigger("Fight");
         PlayerTurn();
     }
+
+    IEnumerator WaitForDoneProcess(float timeout)
+    {
+        while (!(Input.GetKey(KeyCode.Mouse1)))
+        {
+            yield return null;
+            timeout -= Time.deltaTime;
+            if (timeout <= 0f) break;
+        }
+    }
+
+    YieldInstruction WaitForDone(float timeout) { return StartCoroutine(WaitForDoneProcess(timeout)); }
 
     // Player Attack Method
     IEnumerator PlayerAttack()
@@ -132,7 +156,7 @@ public class BattleSystem : MonoBehaviour
         }
 
         dialogueText.text = enemyStats.charName + " took " + playerStats.damage + " damage.";
-        yield return new WaitForSeconds(3f * textSpeed);
+        yield return WaitForDone(3f * textSpeed);
         if(isDead){
             state = BattleState.WON;
             EndBattle();
@@ -256,45 +280,48 @@ public class BattleSystem : MonoBehaviour
         inventoryInterface.GetComponent<Canvas>().enabled = false;
     }
 
-    // Method for Music Transitions
+    // Method for Music Transitions UNFINISHED!
     void transitionMusic()
 	{
-        if ((playerStats.currentHP <= (playerStats.maxHP * 0.25f)) && MCstate == 0)
+        if (false)
         {
-            MCstate = 2;
-            MC100Switch.VariableTransition(MC25, 0.3333f);
-        }
-        else if ((playerStats.currentHP <= (playerStats.maxHP * 0.5f)) && MCstate == 0)
-		{
-            MCstate = 1;
-            MC100Switch.VariableTransition(MC50, 0.3333f);
-		}
-        else if ((playerStats.currentHP > (playerStats.maxHP * 0.5f)) && MCstate == 1)
-        {
-            MCstate = 0;
-            MC50Switch.VariableTransition(MC100, 0.3333f);
-        }
-        else if ((playerStats.currentHP <= (playerStats.maxHP * 0.25f)) && MCstate == 1)
-        {
-            MCstate = 2;
-            MC50Switch.VariableTransition(MC25, 0.3333f);
-        }
-        else if ((playerStats.currentHP > (playerStats.maxHP * 0.5f)) && MCstate == 2)
-        {
-            MCstate = 0;
-            MC25Switch.VariableTransition(MC100, 0.3333f);
-        }
-        else if ((playerStats.currentHP > (playerStats.maxHP * 0.25f)) && MCstate == 2)
-        {
-            MCstate = 1;
-            MC25Switch.VariableTransition(MC50, 0.3333f);
+            if ((playerStats.currentHP <= (playerStats.maxHP * 0.25f)) && MCstate == 0)
+            {
+                MCstate = 2;
+                MC100Switch.VariableTransition(MC25, 0.3333f);
+            }
+            else if ((playerStats.currentHP <= (playerStats.maxHP * 0.5f)) && MCstate == 0)
+            {
+                MCstate = 1;
+                MC100Switch.VariableTransition(MC50, 0.3333f);
+            }
+            else if ((playerStats.currentHP > (playerStats.maxHP * 0.5f)) && MCstate == 1)
+            {
+                MCstate = 0;
+                MC50Switch.VariableTransition(MC100, 0.3333f);
+            }
+            else if ((playerStats.currentHP <= (playerStats.maxHP * 0.25f)) && MCstate == 1)
+            {
+                MCstate = 2;
+                MC50Switch.VariableTransition(MC25, 0.3333f);
+            }
+            else if ((playerStats.currentHP > (playerStats.maxHP * 0.5f)) && MCstate == 2)
+            {
+                MCstate = 0;
+                MC25Switch.VariableTransition(MC100, 0.3333f);
+            }
+            else if ((playerStats.currentHP > (playerStats.maxHP * 0.25f)) && MCstate == 2)
+            {
+                MCstate = 1;
+                MC25Switch.VariableTransition(MC50, 0.3333f);
+            }
         }
     }
 
     // Methods for Enemy Actions ===================================================================
     IEnumerator EnemyAttack0(){
         dialogueText.text = enemyStats.charName + " casts \"Spell of the Fluttering Heart\".";
-        yield return new WaitForSeconds(3f * textSpeed);
+        yield return WaitForDone(3f * textSpeed);
         bool isDead = playerStats.TakeDamage((int)(enemyStats.damage*enemyAttackModifier*enemyHpMod));
         transitionMusic();
         playerHUD.SetHP(playerStats);
@@ -319,7 +346,7 @@ public class BattleSystem : MonoBehaviour
         }
         // Can use Write Method here-------
         dialogueText.text = " You took " + ((int)(enemyStats.damage*enemyAttackModifier*enemyHpMod)).ToString() + " damage.";
-        yield return new WaitForSeconds(3f * textSpeed);
+        yield return WaitForDone(3f * textSpeed);
         enemyAttackModifier = 1;
         if(isDead){
             state = BattleState.LOST;
@@ -335,9 +362,9 @@ public class BattleSystem : MonoBehaviour
     }
 
     IEnumerator EnemyAttack1(){
-        dialogueText.text = enemyStats.charName + " Snow White casts \"Wings of Unconditional Love\"";
+        dialogueText.text = enemyStats.charName + " casts \"Wings of Unconditional Love\"";
         int enemyDamage= Random.Range(0, 13);
-        yield return new WaitForSeconds(3f * textSpeed);
+        yield return WaitForDone(3f * textSpeed);
         bool isDead = playerStats.TakeDamage((int)(enemyDamage*enemyAttackModifier*enemyHpMod));
         transitionMusic();
         playerHUD.SetHP(playerStats);
@@ -362,7 +389,7 @@ public class BattleSystem : MonoBehaviour
         }
         // Can use Write Method here-------
         dialogueText.text = " You took " + ((int)(enemyDamage*enemyAttackModifier)).ToString() + " damage.";
-        yield return new WaitForSeconds(3f * textSpeed);
+        yield return WaitForDone(3f * textSpeed);
         enemyAttackModifier = 1;
         if(isDead){
             state = BattleState.LOST;
@@ -380,13 +407,13 @@ public class BattleSystem : MonoBehaviour
     // This one isn't used in the Tech Demo so ignore it :D
     IEnumerator EnemyAttack2(){
         dialogueText.text = enemyStats.charName + " casts \"Paws of Passionate Protection.\"";
-        yield return new WaitForSeconds(3f * textSpeed);
+        yield return WaitForDone(3f * textSpeed);
         int barrier = (int)(Random.Range(4, 7) * enemyHpMod);
         enemyStats.AddBarrier(barrier);
         enemyHUD.SetHP(enemyStats);
         // Can use Write Method here-------
         dialogueText.text = enemyStats.charName + " gained " + barrier + " barrier.";
-        yield return new WaitForSeconds(3f * textSpeed);
+        yield return WaitForDone(3f * textSpeed);
         
         state = BattleState.PLAYERTURN;
         int enemyAttackType = Random.Range(0, 3);
@@ -421,7 +448,7 @@ public class BattleSystem : MonoBehaviour
         }
         dialogueInterface.GetComponent<Canvas>().enabled = true;
         dialogueText.text = enemyStats.charName + " took " + 999999 + " damage.";
-        yield return new WaitForSeconds(3f * textSpeed);
+        yield return WaitForDone(3f * textSpeed);
         if(isDead){
             state = BattleState.WON;
             EndBattle();
@@ -432,24 +459,28 @@ public class BattleSystem : MonoBehaviour
 
     }
     // Method for Mirror Item - Needs Audio (my bad)
-    IEnumerator UseMirror(){
+    IEnumerator UseMirror()
+    {
+
+        playerAnim.SetTrigger("Mirror");
+        yield return new WaitForSeconds(3.267f);
         playerStats.applyBuff(Buff.REFLECT, 3);
         dialogueInterface.GetComponent<Canvas>().enabled = true;
         dialogueText.text = "You used the Mirror's reflective magic...";
-        yield return new WaitForSeconds(2.5f * textSpeed);
+        yield return WaitForDone(2.5f * textSpeed);
         dialogueText.text = enemyStats.charName + " looked into the Mirror.";
-        yield return new WaitForSeconds(2.5f * textSpeed);
+        yield return WaitForDone(2.5f * textSpeed);
         dialogueText.text = "It seems to have reminded her of something.";
-        yield return new WaitForSeconds(2.5f * textSpeed);
+        yield return WaitForDone(2.5f * textSpeed);
         dialogueText.text = "She seems a bit... sad...";
-        yield return new WaitForSeconds(3f * textSpeed);
+        yield return WaitForDone(3f * textSpeed);
         // I wanna reward the player for using this item by inflicting an additional debuff to Snow White called DEFENSELESS but we'll see to it later
         dialogueInterface.GetComponent<Canvas>().enabled = false;
         playerHUD.SetHP(playerStats);
 
         dialogueInterface.GetComponent<Canvas>().enabled = true;
         dialogueText.text = "You will partially <b>REFLECT</b> damage for two turns!";
-        yield return new WaitForSeconds(3f * textSpeed);
+        yield return WaitForDone(3f * textSpeed);
 
         state = BattleState.ENEMYTURN;
         EnemyTurn();
@@ -459,7 +490,11 @@ public class BattleSystem : MonoBehaviour
 
 
     // Method for Cudgel Item - Needs Audio (my bad)
-    IEnumerator UseCudgel(){
+    IEnumerator UseCudgel()
+    {
+
+        playerAnim.SetTrigger("Cudgel");
+        yield return new WaitForSeconds(3.267f);
         if (playerStats.buffState == Buff.VAMPIRISM){
             if ((int)(5*playerAttackModifier*playerHpMod) > enemyStats.barrier){
                 playerStats.Heal((int)(4*playerHpMod));
@@ -470,9 +505,9 @@ public class BattleSystem : MonoBehaviour
 
         dialogueInterface.GetComponent<Canvas>().enabled = true;
         dialogueText.text = "You lifted the cudgel and hit your opponent.";
-        yield return new WaitForSeconds(2.5f * textSpeed);
+        yield return WaitForDone(2.5f * textSpeed);
         dialogueText.text = "Your strength isn't amazing, but it did some damage.";
-        yield return new WaitForSeconds(2.5f * textSpeed);
+        yield return WaitForDone(2.5f * textSpeed);
         dialogueInterface.GetComponent<Canvas>().enabled = false;
 
         playerHUD.SetHP(playerStats);
@@ -493,7 +528,7 @@ public class BattleSystem : MonoBehaviour
             enemy.GetComponent<SpriteRenderer>().sprite = enemyDown; }
         dialogueInterface.GetComponent<Canvas>().enabled = true;
         dialogueText.text = enemyStats.charName + " took 5 damage.";
-        yield return new WaitForSeconds(3f * textSpeed);
+        yield return WaitForDone(3f * textSpeed);
         if(isDead){
             state = BattleState.WON;
             EndBattle();
@@ -505,24 +540,30 @@ public class BattleSystem : MonoBehaviour
 
 
     // Method for Magic Cloth Item - Needs Audio (my bad)
-    IEnumerator UseMagicCloth(){
+    IEnumerator UseMagicCloth()
+    {
+
+        playerAnim.SetTrigger("Cloth");
+        yield return new WaitForSeconds(3.267f);
         if (playerStats.currentHP == playerStats.maxHP){
             dialogueInterface.GetComponent<Canvas>().enabled = true;
             dialogueText.text = "You used the Magic Cloth.";
-            yield return new WaitForSeconds(2.5f * textSpeed);
+
+            yield return WaitForDone(2.5f * textSpeed);
             dialogueText.text = "With no wounds to heal, it had no effect.";
-            yield return new WaitForSeconds(2.5f * textSpeed);
+            yield return WaitForDone(2.5f * textSpeed);
         } else {
             playerStats.Heal((int)(5*playerHpMod));
             transitionMusic();
             dialogueInterface.GetComponent<Canvas>().enabled = true;
             dialogueText.text = "You used the Magic Cloth.";
-            yield return new WaitForSeconds(2.5f * textSpeed);
+            yield return WaitForDone(2.5f * textSpeed);
             dialogueText.text = "Its warmth eased your pain.";
-            yield return new WaitForSeconds(2.5f * textSpeed);
+
+            yield return WaitForDone(2.5f * textSpeed);
             playerHUD.SetHP(playerStats);
             dialogueText.text = "You healed " + ((int)(5*playerHpMod)).ToString() + " Hp.";
-            yield return new WaitForSeconds(3f * textSpeed);
+            yield return WaitForDone(3f * textSpeed);
         }
     
         state = BattleState.ENEMYTURN;
@@ -531,42 +572,50 @@ public class BattleSystem : MonoBehaviour
 
 
     // Method for Silver Hands Item - Needs Audio (my bad)
-    IEnumerator UseSilverHands(){
+    IEnumerator UseSilverHands()
+    {
+
+        playerAnim.SetTrigger("Hands");
+        yield return new WaitForSeconds(3.267f);
         playerStats.AddBarrier((int)(6*playerHpMod));
         dialogueInterface.GetComponent<Canvas>().enabled = true;
         dialogueText.text = "The Metal Hands of the pure maiden.";
-        yield return new WaitForSeconds(2.5f * textSpeed);
+        yield return WaitForDone(2.5f * textSpeed);
         dialogueText.text = "Unfortunately, they're too heavy for you to bear,";
-        yield return new WaitForSeconds(2.5f * textSpeed);
+        yield return WaitForDone(2.5f * textSpeed);
         dialogueText.text = "but they offer protection against pain to come.";
-        yield return new WaitForSeconds(2.5f * textSpeed);
+        yield return WaitForDone(2.5f * textSpeed);
         dialogueInterface.GetComponent<Canvas>().enabled = false;
 
         playerHUD.SetHP(playerStats);
         hitSound.Play();
         dialogueInterface.GetComponent<Canvas>().enabled = true;
         dialogueText.text = "You gained " + ((int)(6*playerHpMod)).ToString() + " Barrier.";
-        yield return new WaitForSeconds(3f * textSpeed);
+        yield return WaitForDone(3f * textSpeed);
 
         state = BattleState.ENEMYTURN;
         EnemyTurn();
     }
 
     // Method for Rapunzels Hair Item - Needs Audio (my bad)
-    IEnumerator UseRapunzelHair(){
+    IEnumerator UseRapunzelHair()
+    {
+
+        playerAnim.SetTrigger("Hair");
+        yield return new WaitForSeconds(3.267f);
         enemyStats.applyDebuff(Debuff.BIND, 3);
         dialogueInterface.GetComponent<Canvas>().enabled = true;
         dialogueText.text = "The Magic Hair binds your opponent.";
-        yield return new WaitForSeconds(2.5f * textSpeed);
+        yield return WaitForDone(2.5f * textSpeed);
         dialogueText.text = "With movement restricted, her attacks are weakened.";
-        yield return new WaitForSeconds(2.5f * textSpeed);
+        yield return WaitForDone(2.5f * textSpeed);
         dialogueInterface.GetComponent<Canvas>().enabled = false;
 
         enemyHUD.SetHP(enemyStats);
         hitSound.Play();
         dialogueInterface.GetComponent<Canvas>().enabled = true;
         dialogueText.text = enemyStats.charName + " is <b>Bound</b> for 3 turns.";
-        yield return new WaitForSeconds(3f * textSpeed);
+        yield return WaitForDone(3f * textSpeed);
 
         state = BattleState.ENEMYTURN;
         EnemyTurn();
@@ -574,25 +623,32 @@ public class BattleSystem : MonoBehaviour
 
     // New Items =================================================================
     // Method for Iron Shoes Item
-    IEnumerator UseIronShoes(){
+    IEnumerator UseIronShoes()
+    {
+
+        playerAnim.SetTrigger("Shoes");
+        yield return new WaitForSeconds(3.267f);
         if (playerStats.debuffState != Debuff.NONE){
             enemyStats.applyDebuff(playerStats.debuffState, (int)(playerStats.debuffDuration + playerHpMod - 1));
             // Need to get code for activating debuff intigators
             playerStats.applyDebuff(Debuff.NONE, 0);
+
             dialogueInterface.GetComponent<Canvas>().enabled = true;
             dialogueText.text = "As you slip on the shoes, a wave of envy engulfs you.";
-            yield return new WaitForSeconds(2.5f * textSpeed);
+            yield return WaitForDone(2.5f * textSpeed);
             dialogueText.text = "You want the peace they have, and the shoes seem somehow able to grant this desire.";
-            yield return new WaitForSeconds(2.5f * textSpeed);
+            yield return WaitForDone(2.5f * textSpeed);
             dialogueText.text = enemyStats.charName + "'s debuff duration is increased to " + enemyStats.debuffDuration.ToString();
-            yield return new WaitForSeconds(2.5f * textSpeed);
+            yield return WaitForDone(2.5f * textSpeed);
             dialogueInterface.GetComponent<Canvas>().enabled = false;
-        } else {
+        } else
+        {
+
             dialogueInterface.GetComponent<Canvas>().enabled = true;
             dialogueText.text = "The shoes are snug...";
-            yield return new WaitForSeconds(2.5f * textSpeed);
+            yield return WaitForDone(2.5f * textSpeed);
             dialogueText.text = "But they don't seem to be doing anything.";
-            yield return new WaitForSeconds(2.5f * textSpeed);
+            yield return WaitForDone(2.5f * textSpeed);
             dialogueInterface.GetComponent<Canvas>().enabled = false;
         }
 
@@ -601,7 +657,11 @@ public class BattleSystem : MonoBehaviour
     }
 
     // Method for Hat that fires bullets Item
-    IEnumerator UseHat(){
+    IEnumerator UseHat()
+    {
+
+        playerAnim.SetTrigger("Mirror");
+        yield return new WaitForSeconds(3.267f);
         int randInt = Random.Range(1, 5);
         bool isDead = false;
         for (int i = 0; i < randInt; i++){
@@ -613,11 +673,12 @@ public class BattleSystem : MonoBehaviour
             isDead = enemyStats.TakeDamage((int)(2*playerAttackModifier*playerHpMod));
             transitionMusic();
         }
+
         dialogueInterface.GetComponent<Canvas>().enabled = true;
         dialogueText.text = "The hat fires " + randInt.ToString() + " bullets.";
-        yield return new WaitForSeconds(2.5f * textSpeed);
+        yield return WaitForDone(2.5f * textSpeed);
         dialogueText.text = enemyStats.charName + " took " + ((int)(randInt*2*playerAttackModifier*playerHpMod)).ToString() + " damage.";
-        yield return new WaitForSeconds(2.5f * textSpeed);
+        yield return WaitForDone(2.5f * textSpeed);
         dialogueInterface.GetComponent<Canvas>().enabled = false;
 
         playerHUD.SetHP(playerStats);
@@ -647,19 +708,25 @@ public class BattleSystem : MonoBehaviour
     }
 
     // Method for Crystal Ball Item
-    IEnumerator UseCrystalBall(){
-        if (playerStats.debuffState != Debuff.NONE){
+    IEnumerator UseCrystalBall()
+    {
+
+        playerAnim.SetTrigger("Ball");
+        yield return new WaitForSeconds(3.267f);
+        if (playerStats.debuffState != Debuff.NONE)
+        {
+
             dialogueInterface.GetComponent<Canvas>().enabled = true;
             dialogueText.text = "The Crystal Ball lit up...";
-            yield return new WaitForSeconds(2.5f * textSpeed);
+            yield return WaitForDone(2.5f * textSpeed);
             dialogueText.text = "Your ailment is alleviated.";
-            yield return new WaitForSeconds(2.5f * textSpeed);
+            yield return WaitForDone(2.5f * textSpeed);
             if (playerStats.buffState != Buff.NONE){
                 dialogueText.text = "The malady turns into your strength.";
-                yield return new WaitForSeconds(2.5f * textSpeed);
+                yield return WaitForDone(2.5f * textSpeed);
                 playerStats.applyBuff(playerStats.buffState, (int)(playerStats.buffDuration + playerStats.debuffDuration + playerHpMod - 1));
                 dialogueText.text = "Your buff duration is increased to " + playerStats.buffDuration.ToString();
-                yield return new WaitForSeconds(2.5f * textSpeed);
+                yield return WaitForDone(2.5f * textSpeed);
             }
             playerStats.applyDebuff(Debuff.NONE, 0);
             // Need to get code for handling debuff/buff indicators
@@ -667,9 +734,9 @@ public class BattleSystem : MonoBehaviour
         } else {
             dialogueInterface.GetComponent<Canvas>().enabled = true;
             dialogueText.text = "You try using the Crystal Ball...";
-            yield return new WaitForSeconds(2.5f * textSpeed);
+            yield return WaitForDone(2.5f * textSpeed);
             dialogueText.text = "But it doesn't seem to be doing anything.";
-            yield return new WaitForSeconds(2.5f * textSpeed);
+            yield return WaitForDone(2.5f * textSpeed);
         }
 
         state = BattleState.ENEMYTURN;
@@ -677,18 +744,22 @@ public class BattleSystem : MonoBehaviour
     }
 
     // Method for Apple from Tree of Life Item
-    IEnumerator UseApple(){
+    IEnumerator UseApple()
+    {
+
+        playerAnim.SetTrigger("Apple");
+        yield return new WaitForSeconds(3.267f);
         playerStats.applyBuff(Buff.DMGBOOST, (int)(4 + playerHpMod - 1));
         dialogueInterface.GetComponent<Canvas>().enabled = true;
         dialogueText.text = "You ate the Apple from the Tree of Life.";
-        yield return new WaitForSeconds(2.5f * textSpeed);
+        yield return WaitForDone(2.5f * textSpeed);
         dialogueText.text = enemyStats.charName + "A newfound strength wells up inside you.";
-        yield return new WaitForSeconds(2.5f * textSpeed);
+        yield return WaitForDone(2.5f * textSpeed);
         dialogueInterface.GetComponent<Canvas>().enabled = false;
 
         dialogueInterface.GetComponent<Canvas>().enabled = true;
         dialogueText.text = "You gain a <b>DAMAGE BOOST</b> for " + ((int)(4 + playerHpMod - 1)).ToString() + " turns!";
-        yield return new WaitForSeconds(3f * textSpeed);
+        yield return WaitForDone(3f * textSpeed);
 
         state = BattleState.ENEMYTURN;
         EnemyTurn();
@@ -696,7 +767,11 @@ public class BattleSystem : MonoBehaviour
     }
 
     // Method for White Snake Venom Item
-    IEnumerator UseVenom(){
+    IEnumerator UseVenom()
+    {
+
+        playerAnim.SetTrigger("Venom");
+        yield return new WaitForSeconds(3.267f);
         bool isDead = playerStats.TakeDamage(3);
         transitionMusic();
         playerHUD.SetHP(playerStats);
@@ -708,13 +783,13 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
         dialogueText.text = " You took 3 damage from the bitter venom.";
-        yield return new WaitForSeconds(2f * textSpeed);
+        yield return WaitForDone(2f * textSpeed);
 
         if(isDead){
             dialogueText.text = "Your weakened body couldn't handle the poison...";
-            yield return new WaitForSeconds(2f * textSpeed);
+            yield return WaitForDone(2f * textSpeed);
             dialogueText.text = "Your consciousness fades...";
-            yield return new WaitForSeconds(2f * textSpeed);
+            yield return WaitForDone(2f * textSpeed);
             state = BattleState.LOST;
             EnemyAttackIndicatorController.Instance.disableAllIndicators();
             EndBattle();
@@ -722,9 +797,9 @@ public class BattleSystem : MonoBehaviour
             playerStats.applyBuff(Buff.VAMPIRISM, (int)(4*playerHpMod));
             dialogueInterface.GetComponent<Canvas>().enabled = true;
             dialogueText.text = "The bitterness turns to thirst...";
-            yield return new WaitForSeconds(2.5f * textSpeed);
+            yield return WaitForDone(2.5f * textSpeed);
             dialogueText.text = "You gained <b>VAMPIRISM</b> for " + ((int)(4*playerHpMod) - 1).ToString() + " turns!";
-            yield return new WaitForSeconds(2.5f * textSpeed);
+            yield return WaitForDone(2.5f * textSpeed);
             state = BattleState.ENEMYTURN;
             EnemyTurn();
             // Needs Indicator handling
@@ -736,7 +811,7 @@ public class BattleSystem : MonoBehaviour
         
         dialogueInterface.GetComponent<Canvas>().enabled = true;
         // Do sack of knowledge UI stuff here
-        yield return new WaitForSeconds(2.5f * textSpeed);
+        yield return WaitForDone(2.5f * textSpeed);
 
         state = BattleState.ENEMYTURN;
         EnemyTurn();
