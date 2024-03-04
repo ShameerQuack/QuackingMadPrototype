@@ -113,8 +113,10 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator StartIntro(){
         skip.SetActive(false);
-        dialogueText.text = enemyStats.charName + " looked at you funny.";
+        dialogueText.text = enemyStats.charName + " tenses, her eyes cold.";
         yield return new WaitForSeconds(5.3333f);  // the 5.3333f value is her for music syncing. Do not change it please!!!!!
+        dialogueText.text = "She is powerful, and she knows it.";
+        yield return new WaitForSeconds(5.3333f);
         dialogueText.text = "Don't back down.";
         yield return new WaitForSeconds(5.3333f);
 
@@ -466,14 +468,14 @@ public class BattleSystem : MonoBehaviour
         yield return new WaitForSeconds(3.267f);
         playerStats.applyBuff(Buff.REFLECT, 3);
         dialogueInterface.GetComponent<Canvas>().enabled = true;
-        dialogueText.text = "You used the Mirror's reflective magic...";
+        dialogueText.text = "The mirror glows, reflective magic seeping out from its cracks.";
         yield return WaitForDone(2.5f * textSpeed);
-        dialogueText.text = enemyStats.charName + " looked into the Mirror.";
+        dialogueText.text = enemyStats.charName + " gazes at it as you hold it up.";
         yield return WaitForDone(2.5f * textSpeed);
-        dialogueText.text = "It seems to have reminded her of something.";
+        dialogueText.text = "Her expression shifts as she stares at what it is showing her, flames dancing in her eyes.";
         yield return WaitForDone(2.5f * textSpeed);
-        dialogueText.text = "She seems a bit... sad...";
-        yield return WaitForDone(3f * textSpeed);
+        dialogueText.text = "Her guilt and anger are palpable. You can still hear the screaming.";
+        yield return WaitForDone(2.5f * textSpeed);
         // I wanna reward the player for using this item by inflicting an additional debuff to Snow White called DEFENSELESS but we'll see to it later
         dialogueInterface.GetComponent<Canvas>().enabled = false;
         playerHUD.SetHP(playerStats);
@@ -504,9 +506,9 @@ public class BattleSystem : MonoBehaviour
         transitionMusic();
 
         dialogueInterface.GetComponent<Canvas>().enabled = true;
-        dialogueText.text = "You lifted the cudgel and hit your opponent.";
+        dialogueText.text = "You read the inscription on the bag. A cudgel flies out.";
         yield return WaitForDone(2.5f * textSpeed);
-        dialogueText.text = "Your strength isn't amazing, but it did some damage.";
+        dialogueText.text = "Heavy yet swift, it seems to know exactly where to go.";
         yield return WaitForDone(2.5f * textSpeed);
         dialogueInterface.GetComponent<Canvas>().enabled = false;
 
@@ -579,12 +581,12 @@ public class BattleSystem : MonoBehaviour
         yield return new WaitForSeconds(3.267f);
         playerStats.AddBarrier((int)(6*playerHpMod));
         dialogueInterface.GetComponent<Canvas>().enabled = true;
-        dialogueText.text = "The Metal Hands of the pure maiden.";
+        dialogueText.text = "The metal hands of the purest maiden, ornate and oddly untarnished.";
         yield return WaitForDone(2.5f * textSpeed);
-        dialogueText.text = "Unfortunately, they're too heavy for you to bear,";
+        dialogueText.text = "They don't think you're that pure, so they are immobile and heavy in your grip.";
         yield return WaitForDone(2.5f * textSpeed);
-        dialogueText.text = "but they offer protection against pain to come.";
-        yield return WaitForDone(2.5f * textSpeed);
+        dialogueText.text = "You think they make some pretty mean gauntlets to defend with, however.";
+        yield return WaitForDone(2.5f * textSpeed); 
         dialogueInterface.GetComponent<Canvas>().enabled = false;
 
         playerHUD.SetHP(playerStats);
@@ -605,10 +607,12 @@ public class BattleSystem : MonoBehaviour
         yield return new WaitForSeconds(3.267f);
         enemyStats.applyDebuff(Debuff.BIND, 3);
         dialogueInterface.GetComponent<Canvas>().enabled = true;
-        dialogueText.text = "The Magic Hair binds your opponent.";
+        dialogueText.text = "Rapunzel's hair. You wonder why this is an item, and an invasion or privacy.";
         yield return WaitForDone(2.5f * textSpeed);
-        dialogueText.text = "With movement restricted, her attacks are weakened.";
+        dialogueText.text = "It is quite strong, now that you think about it.";
         yield return WaitForDone(2.5f * textSpeed);
+        dialogueText.text = "Snow White is bound and hindered. She glares at you.";
+        yield return WaitForDone(2.5f * textSpeed); 
         dialogueInterface.GetComponent<Canvas>().enabled = false;
 
         enemyHUD.SetHP(enemyStats);
@@ -660,7 +664,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator UseHat()
     {
 
-        playerAnim.SetTrigger("Mirror");
+        playerAnim.SetTrigger("Hat");
         yield return new WaitForSeconds(3.267f);
         int randInt = Random.Range(1, 5);
         bool isDead = false;
@@ -717,13 +721,11 @@ public class BattleSystem : MonoBehaviour
         {
 
             dialogueInterface.GetComponent<Canvas>().enabled = true;
-            dialogueText.text = "The Crystal Ball lit up...";
+            dialogueText.text = "You rub the surface of the crystal ball and feel a strange sensation wash over you.";
             yield return WaitForDone(2.5f * textSpeed);
-            dialogueText.text = "Your ailment is alleviated.";
+            dialogueText.text = "Your ailments seem to have disappeared, while your boons feel more enduring.";
             yield return WaitForDone(2.5f * textSpeed);
             if (playerStats.buffState != Buff.NONE){
-                dialogueText.text = "The malady turns into your strength.";
-                yield return WaitForDone(2.5f * textSpeed);
                 playerStats.applyBuff(playerStats.buffState, (int)(playerStats.buffDuration + playerStats.debuffDuration + playerHpMod - 1));
                 dialogueText.text = "Your buff duration is increased to " + playerStats.buffDuration.ToString();
                 yield return WaitForDone(2.5f * textSpeed);
@@ -733,7 +735,7 @@ public class BattleSystem : MonoBehaviour
 
         } else {
             dialogueInterface.GetComponent<Canvas>().enabled = true;
-            dialogueText.text = "You try using the Crystal Ball...";
+            dialogueText.text = "You rub the surface of the crystal ball and feel a strange sensation wash over you.";
             yield return WaitForDone(2.5f * textSpeed);
             dialogueText.text = "But it doesn't seem to be doing anything.";
             yield return WaitForDone(2.5f * textSpeed);
@@ -751,9 +753,9 @@ public class BattleSystem : MonoBehaviour
         yield return new WaitForSeconds(3.267f);
         playerStats.applyBuff(Buff.DMGBOOST, (int)(4 + playerHpMod - 1));
         dialogueInterface.GetComponent<Canvas>().enabled = true;
-        dialogueText.text = "You ate the Apple from the Tree of Life.";
+        dialogueText.text = "You ate the apple, and instantly feel a tingling sensation.";
         yield return WaitForDone(2.5f * textSpeed);
-        dialogueText.text = enemyStats.charName + "A newfound strength wells up inside you.";
+        dialogueText.text = "You feel energized, and your weapon feels lighter in your hand.";
         yield return WaitForDone(2.5f * textSpeed);
         dialogueInterface.GetComponent<Canvas>().enabled = false;
 
