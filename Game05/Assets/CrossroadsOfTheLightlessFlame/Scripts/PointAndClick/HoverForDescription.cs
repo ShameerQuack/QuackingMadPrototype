@@ -8,8 +8,10 @@ using TMPro;
 public class HoverForDescription : MonoBehaviour
 {
     public Image spriteRenderer;
-    public AudioSource scrape;
+    // public AudioSource scrape;
     public CursorMoment cursorChanger;
+    public GameEvent cursorChangeEnterEvent;
+    public GameEvent cursorChangeExitEvent;
     public bool inBattle = false;
     public bool knowledgeBag = false;
     public GameObject battleDescription;
@@ -56,7 +58,8 @@ public class HoverForDescription : MonoBehaviour
             }
             else
                 spriteRenderer.enabled = true;
-            scrape.Play();
+            // scrape.Play();
+            cursorChangeEnterEvent.Raise();
             cursorChanger.ChangeCursor();
         }
     }
@@ -71,5 +74,6 @@ public class HoverForDescription : MonoBehaviour
         else
             spriteRenderer.enabled = false;
         cursorChanger.UnchangeCursor();
+        cursorChangeExitEvent.Raise();
     }
 }

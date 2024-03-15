@@ -17,7 +17,7 @@ public class BookMarkSelectionManager : MonoBehaviour
     public GameEvent blueClickedEvent;
     public CrossRoadData crossRoadDataSaveObject;
     public Transform notePosition;
-    public AudioSource scrapeSound;
+    // public AudioSource scrapeSound;
     public TextMeshProUGUI redBuff;
     public TextMeshProUGUI blueBuff;
     public TextMeshProUGUI redTitle;
@@ -94,7 +94,7 @@ public class BookMarkSelectionManager : MonoBehaviour
             iconNoteReference.spriteRenderer = noteObj.transform.GetComponent<Image>();
             note.sprite = redSet.items[i].note;
             icon.sprite = redSet.items[i].crossRoadsIcon;
-            obj.transform.Find("Icon").GetComponent<HoverForDescription>().scrape = scrapeSound;
+            // obj.transform.Find("Icon").GetComponent<HoverForDescription>().scrape = scrapeSound;
             obj.transform.Find("Icon").GetComponent<HoverForDescription>().cursorChanger = theCursor;
         }
 
@@ -108,7 +108,7 @@ public class BookMarkSelectionManager : MonoBehaviour
             iconNoteReference.spriteRenderer = noteObj.transform.GetComponent<Image>();
             note.sprite = blueSet.items[i].note;
             icon.sprite = blueSet.items[i].crossRoadsIcon;
-            obj.transform.Find("Icon").GetComponent<HoverForDescription>().scrape = scrapeSound;
+            // obj.transform.Find("Icon").GetComponent<HoverForDescription>().scrape = scrapeSound;
             obj.transform.Find("Icon").GetComponent<HoverForDescription>().cursorChanger = theCursor;
         }
 

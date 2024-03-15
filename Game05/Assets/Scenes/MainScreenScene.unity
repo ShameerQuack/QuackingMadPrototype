@@ -3336,6 +3336,12 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2
       objectReference: {fileID: 0}
+    - target: {fileID: 7511988481160349833, guid: cabb27c4970a4ac4a92ffbf7857f5e8c,
+        type: 3}
+      propertyPath: sceneTransitionStartEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 2f0789ca6a627c04ba028ae2c7c8ef52,
+        type: 2}
     - target: {fileID: 7511988481160349834, guid: cabb27c4970a4ac4a92ffbf7857f5e8c,
         type: 3}
       propertyPath: m_RootOrder

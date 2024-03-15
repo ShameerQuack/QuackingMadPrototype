@@ -34,6 +34,7 @@ namespace Narrative
         [SerializeField] private TextMeshProUGUI originalTextLabel;
         [SerializeField] private TextMeshProUGUI otherTextLabel;
         [SerializeField] private DialogueChoices choices;
+        public GameEvent dialogueClickedEvent;
 
         //Object properties
         private DialogueSequence currentDialog;  //set when we are playing
@@ -76,7 +77,8 @@ namespace Narrative
         public void onSequenceAdvanced()
         {
             if (!DialogueBox.midFight)
-                gameObject.GetComponent<AudioSource>().Play();
+                // gameObject.GetComponent<AudioSource>().Play();
+                dialogueClickedEvent.Raise();
             bool hasNext = currentDialog.HasLine(currentLine + 1);
             if (hasNext)
             {

@@ -3,7 +3,16 @@ guid: 9d0779f8fbbf7d942be78d39cb8bb106
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - spriteRenderer: {instanceID: 0}
+  - scrape: {instanceID: 0}
+  - cursorChanger: {instanceID: 0}
+  - cursorChangedEvent: {fileID: 11400000, guid: 4c56ca44617f15f428110638f9134280,
+      type: 2}
+  - battleDescription: {instanceID: 0}
+  - description: {instanceID: 0}
+  - HPReference: {instanceID: 0}
+  - maxFlame: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -7,6 +7,7 @@ public class SceneChanger : MonoBehaviour
     public static SceneChanger Instance { get { return _instance; } }
 
     public Animator animator;
+    public GameEvent sceneTransitionStartEvent;
 
     private int sceneToLoad;
 
@@ -16,6 +17,7 @@ public class SceneChanger : MonoBehaviour
     }
 
     public void FadeToNextScene(){
+        sceneTransitionStartEvent.Raise();
         FadeToScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

@@ -37,7 +37,8 @@ namespace Narrative
         public bool IsActive { get { return isActive; } }
         private float waitForTime = -1.0f;
 
-        public AudioSource talkSound;
+        public GameEvent talkingStartEvent;
+        public GameEvent talkingStopEvent;
         public MusicLoop transitionMusic;
         public int enemyIntroChangePoint = 0;
         public int enemyIntroCheck = 0;
@@ -124,7 +125,7 @@ namespace Narrative
 
                 if (isEndOfText())
                 {
-                    talkSound.Stop();
+                    talkingStopEvent.Raise();
                     advanceArrow.SetVisible(true);
                     advanceArrow2.SetVisible(true);
                 }
@@ -136,7 +137,7 @@ namespace Narrative
         /// </summary>
         public void OpenTextbox()
         {
-            talkSound.Play();
+            talkingStartEvent.Raise();
             animator.SetBool("isOpen", true);
             advanceArrow.SetVisible(false);
             advanceArrow2.SetVisible(false);
@@ -159,7 +160,7 @@ namespace Narrative
         public void CloseTextbox()
         {
             animator.SetBool("isOpen", false);
-            talkSound.Stop();
+            talkingStopEvent.Raise();
         }
 
         /// <summary>
@@ -218,7 +219,7 @@ namespace Narrative
                     fullBody.SetTrigger("Get Mad");
 				}
 			}
-            talkSound.Play();
+            talkingStartEvent.Raise();
             advanceArrow.SetVisible(false);
             advanceArrow2.SetVisible(false);
             onAdvance.Invoke();
