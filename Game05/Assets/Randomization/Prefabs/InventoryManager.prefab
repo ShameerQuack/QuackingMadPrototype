@@ -1612,6 +1612,8 @@ GameObject:
   - component: {fileID: 598201093617083251}
   - component: {fileID: 598201093617083248}
   - component: {fileID: 598201093617083260}
+  - component: {fileID: 2652523567476390676}
+  - component: {fileID: 6972165217992749411}
   m_Layer: 5
   m_Name: InventoryManager
   m_TagString: Untagged
@@ -1636,7 +1638,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.6, y: -15.7}
+  m_AnchoredPosition: {x: -0.6000061, y: -15.700012}
   m_SizeDelta: {x: 1380.7771, y: 484.96753}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &598201093617083250
@@ -1711,9 +1713,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d571737d3560804d86e25aca0b1d778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crossRoadDataSaveObject: {fileID: 11400000, guid: 385857d097e6ea04789c411846c1d163,
-    type: 2}
   contentTransform: {fileID: 598201093049787680}
+  passiveBuff: 
+--- !u!114 &2652523567476390676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598201093617083249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 068f327edb4ddb446a7c8b0977162add, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 6fad89ecb9038824f83698ece870b05e, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 598201093617083260}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6972165217992749411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598201093617083249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 068f327edb4ddb446a7c8b0977162add, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 6fad89ecb9038824f83698ece870b05e, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 598201093617083260}
+        m_MethodName: OnLoadResult
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &598201093653382672
 GameObject:
   m_ObjectHideFlags: 0

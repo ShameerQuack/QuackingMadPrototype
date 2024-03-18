@@ -7,8 +7,14 @@ public class CombatMaster : MonoBehaviour
 {
     private static CombatMaster _instance;
     public static CombatMaster Instance { get { return _instance;}}
+
+    public GameEvent sceneStartEvent;
     
     void Awake(){
         _instance = this;
+    }
+
+    void Start(){
+        sceneStartEvent.Raise();
     }
 }

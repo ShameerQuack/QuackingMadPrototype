@@ -7,17 +7,23 @@ public class InventoryManager : MonoBehaviour
     private List<Item> items;
     public CrossRoadData crossRoadDataSaveObject;
     public Transform contentTransform;
+    public GameEvent loadRequestEvent;
+    public GameEvent saveRequestEvent;
     public string passiveBuff;
 
     void Start(){
-        items = crossRoadDataSaveObject.items;
         this.gameObject.transform.GetComponent<Canvas>().enabled = false;
+        loadRequestEvent.Raise();
+    }
+
+    public void OnLoadResult(SaveData saveData){
         foreach(Transform item in contentTransform){
             item.gameObject.SetActive(false);
         }
-        foreach(Item item in items){
-            contentTransform.Find(item.name).gameObject.SetActive(true);
+        foreach(string itemName in saveData.items){
+            contentTransform.Find(itemName).gameObject.SetActive(true);
         }
-        passiveBuff = crossRoadDataSaveObject.message;
+        passiveBuff = saveData.message;
+        saveRequestEvent.Raise();
     }
 }
