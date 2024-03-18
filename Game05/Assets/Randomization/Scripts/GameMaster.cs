@@ -9,10 +9,15 @@ public class GameMaster : MonoBehaviour
     public static GameMaster Instance { get { return _instance;}}
 
     public BookMarkSelectionManager BookMarkSelectionManager { get; private set; }
+    public GameEvent sceneStartEvent;
 
     void Awake(){
         _instance = this;
 
         BookMarkSelectionManager = GetComponentInChildren<BookMarkSelectionManager>();
+    }
+
+    void Start(){
+        sceneStartEvent.Raise();
     }
 }
